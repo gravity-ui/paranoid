@@ -20,7 +20,6 @@ export function getTitle(
     fontFamily: "YS Text",
     fill: colors.getCommonColor("text-misc"),
     originY: "center",
-    hoverCursor: isExpandable ? "pointer" : "default",
   });
   const items: fabric.Object[] = [text];
   let icon;
@@ -47,10 +46,15 @@ export function getTitle(
     icon.set({
       fill: colors.getCommonColor("text-misc"),
       top: 0,
-      left: -22,
+      left: 0,
+      originY: "center",
     });
+    text.set({ left: 22 });
     items.push(icon);
   }
 
-  return new fabric.Group(items, { ...GroupControls });
+  return new fabric.Group(items, {
+    ...GroupControls,
+    hoverCursor: isExpandable ? "pointer" : "default",
+  });
 }

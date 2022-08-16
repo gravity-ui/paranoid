@@ -9,8 +9,8 @@ import {
 import { GroupControls } from "../../../constants";
 import { TreeNode } from "../../../tree";
 import { ParanoidEmmiter } from "../../../event-emmiter";
+import { createId, ID_PADDING } from "../common";
 import { NodeSize } from "./constants";
-import { getStage } from "./stage";
 import { getTitle } from "./title";
 import { getTables } from "./tables";
 import { getStats } from "../../postgresql-explain/node/stats";
@@ -85,7 +85,7 @@ export class StageNodeShape implements Shape {
   }
 
   toggleHighlight(highlight: boolean) {
-    if (!this.expanded) {
+    if (this.isExpandable() && !this.expanded) {
       this.body.set({
         fill: highlight ? this.getHoverFillColor() : this.getFillColor(),
         shadow: this.getHoverShadow(),
@@ -114,28 +114,33 @@ export class StageNodeShape implements Shape {
   }
 
   private prepareShapeObjects() {
-    const stage = getStage(`Stage ${this.data.id}`, this.opts.colors);
+    const id = createId(this.data.id, this.isExpandable(), this.opts.colors);
     const title = getTitle(
       this.data.operators || [this.data.name || ""],
+      this.isExpandable(),
       this.opts.colors
     );
     const tables = getTables(this.data.tables || [], this.opts.colors);
 
-    return [stage, title, tables];
+    return [id, title, tables];
   }
 
   private setShapeObjectsCoords() {
-    const [stage, title, tables] = this.objects;
+    const [id, title, tables] = this.objects;
     const top = NodeSize.padding;
     const left = NodeSize.padding;
-    const titleTop = top + stage.getScaledHeight() + NodeSize.textOffset;
 
-    stage.set({ left, top });
-    title.set({ left, top: titleTop });
+    id.set({
+      left: 0,
+      top: ID_PADDING,
+      width:
+        (this.expanded ? NodeSize.expandedWidth : NodeSize.width) - ID_PADDING,
+    });
+    title.set({ left, top });
     tables.set({
       left,
       top:
-        titleTop +
+        top +
         title.getScaledHeight() +
         ((tables as fabric.Group).size() === 0 ? 0 : NodeSize.textOffset),
     });
@@ -189,13 +194,15 @@ export class StageNodeShape implements Shape {
       const width = NodeSize.width;
       const height = this.nodeHeight;
 
-      this.body.set({
-        width,
-        height,
-        fill: this.getFillColor(),
-        shadow: this.getShadow(),
-      });
-      this.body.setCoords();
+      this.body
+        .set({
+          width,
+          height,
+          fill: this.getFillColor(),
+          shadow: this.getShadow(),
+        })
+        .setCoords();
+      this.objects[0].set({ width: width - ID_PADDING }).setCoords();
       this.group.removeWithUpdate(this.stats as fabric.Group);
       this.stats = undefined;
     } else {
@@ -211,19 +218,21 @@ export class StageNodeShape implements Shape {
 
       const width = NodeSize.expandedWidth;
       const height = this.expandedNodeHeight;
-      this.body.set({
-        width,
-        height,
-        fill: this.getFillColor(),
-        shadow: this.getShadow(),
-      });
+      this.body
+        .set({
+          width,
+          height,
+          fill: this.getFillColor(),
+          shadow: this.getShadow(),
+        })
+        .setCoords();
 
-      this.body.setCoords();
+      this.objects[0].set({ width: width - ID_PADDING }).setCoords();
       this.group.addWithUpdate(this.stats);
     }
   }
 
   private isExpandable() {
-    return this.data.stats && this.data.stats.length > 0;
+    return Boolean(this.data.stats && this.data.stats.length > 0);
   }
 }

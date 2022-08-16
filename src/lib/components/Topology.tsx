@@ -3,6 +3,7 @@ import { getTopology } from "../main";
 import { Data, Options, Shapes } from "../models";
 import { Topology } from "../topology";
 import _ from "lodash";
+import ResizeObserver from "resize-observer-polyfill";
 
 const paranoidRoot = "paranoidRoot";
 export interface TopologyProps {
@@ -15,6 +16,23 @@ export interface TopologyProps {
 
 export class TopologyWrapper extends React.Component<TopologyProps> {
   private paranoid?: Topology;
+  private container: React.RefObject<HTMLDivElement>;
+  private resizeObserver: ResizeObserver;
+
+  private handleResize = _.debounce((entries: ResizeObserverEntry[]) => {
+    const { contentRect } = entries[0];
+
+    this.paranoid?.getCanvas().setWidth(contentRect.width);
+    this.paranoid?.getCanvas().setHeight(contentRect.height);
+    this.paranoid?.getCanvas().renderAll();
+  }, 300);
+
+  constructor(props: TopologyProps) {
+    super(props);
+
+    this.container = React.createRef();
+    this.resizeObserver = new ResizeObserver(this.handleResize);
+  }
 
   componentDidMount() {
     // TODO: Fix incorrect calculation of canvas on fullscreen activation
@@ -25,6 +43,7 @@ export class TopologyWrapper extends React.Component<TopologyProps> {
       this.props.shapes
     );
     this.paranoid.render();
+    this.resizeObserver.observe(this.container.current as Element);
     if (this.props.initListeners) {
       this.props.initListeners(this.paranoid);
     }
@@ -52,14 +71,21 @@ export class TopologyWrapper extends React.Component<TopologyProps> {
   componentWillUnmount() {
     if (this.paranoid) {
       this.paranoid.destroy();
+      this.paranoid = undefined;
     }
+
+    this.resizeObserver.disconnect();
   }
 
   render() {
     const { styles } = this.props;
 
     return (
-      <div id={paranoidRoot} style={styles ? styles : { height: "100%" }} />
+      <div
+        ref={this.container}
+        id={paranoidRoot}
+        style={styles ? styles : { height: "100%" }}
+      />
     );
   }
 }

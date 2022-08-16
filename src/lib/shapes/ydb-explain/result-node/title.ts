@@ -9,6 +9,5 @@ export function getTitle(lines: string[], colors: EnhancedColors) {
     top: 26,
     fontFamily: "YS Text",
     fill: colors.getCommonColor("text-primary"),
-    hoverCursor: "pointer",
   });
 }

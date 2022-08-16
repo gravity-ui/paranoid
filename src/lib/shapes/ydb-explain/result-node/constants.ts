@@ -1,7 +1,7 @@
 import { NodeSizes } from "../../../constants";
 
 export const NodeSize = {
-  width: 156,
+  width: 112,
   borderRadius: 6,
   titleFontSize: NodeSizes.titleFontSize,
   titleLineHeight: NodeSizes.titleLineHeight,
