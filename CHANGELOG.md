@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/yandex-cloud/paranoid/compare/v1.1.0...v1.2.0) (2022-08-18)
+
+
+### Features
+
+* update ydb plan nodes view ([#16](https://github.com/yandex-cloud/paranoid/issues/16)) ([9ff53e8](https://github.com/yandex-cloud/paranoid/commit/9ff53e8355694f7dc22de071801c8ec8a3645d4a))
+
 ## [1.1.0](https://github.com/yandex-cloud/paranoid/compare/v1.0.0...v1.1.0) (2022-07-18)
 
 
