@@ -9,9 +9,11 @@ import {
 import { GroupControls } from "../../../constants";
 import { TreeNode } from "../../../tree";
 import { ParanoidEmmiter } from "../../../event-emmiter";
+import { createId, ID_PADDING } from "../common";
 import { NodeSize } from "./constants";
 import { getTitle } from "./title";
 import { getStats } from "../../postgresql-explain/node/stats";
+import { initRegroup } from "../utils";
 
 export class ConnectionNodeShape implements Shape {
   private readonly canvas: fabric.Canvas;
@@ -70,7 +72,7 @@ export class ConnectionNodeShape implements Shape {
   }
 
   toggleHighlight(highlight: boolean) {
-    if (!this.expanded) {
+    if (this.isExpandable() && !this.expanded) {
       this.body.set({
         fill: highlight ? this.getHoverFillColor() : this.getFillColor(),
       });
@@ -89,6 +91,7 @@ export class ConnectionNodeShape implements Shape {
       width: NodeSize.width,
       height: this.nodeHeight,
       fill: this.getFillColor(),
+      shadow: this.getShadow(),
       stroke: colors.getCommonColor("line-misc"),
       rx: NodeSize.borderRadius,
       ry: NodeSize.borderRadius,
@@ -97,23 +100,30 @@ export class ConnectionNodeShape implements Shape {
   }
 
   private prepareShapeObjects() {
+    const id = createId(this.data.id, this.isExpandable(), this.opts.colors);
     const title = getTitle(
       this.data.name || "",
       this.isExpandable(),
       this.opts.colors
     );
 
-    return [title];
+    return [id, title];
   }
 
   private setShapeObjectsCoords() {
-    const [title] = this.objects;
+    const [id, title] = this.objects;
     const top = NodeSize.padding;
     // const left = NodeSize.padding;
 
+    const nodeWidth = this.expanded ? NodeSize.expandedWidth : NodeSize.width;
     const titleWidth = title.getScaledWidth();
 
-    title.set({ left: NodeSize.width / 2 - titleWidth / 2, top });
+    id.set({
+      left: 0,
+      top: ID_PADDING,
+      width: nodeWidth - ID_PADDING,
+    });
+    title.set({ left: nodeWidth / 2 - titleWidth / 2, top });
   }
 
   private createGroup() {
@@ -151,29 +161,19 @@ export class ConnectionNodeShape implements Shape {
         return;
       }
 
-      this.updateDimensions();
       this.expanded = !this.expanded;
+      this.updateDimensions();
       this.em.dispatch("node:resize", this.treeNode);
     });
   }
 
   private updateDimensions() {
     const colors = this.opts.colors;
+    const [id, title] = this.objects;
+    const titleWidth = title.getScaledWidth();
+    let width, height;
 
     if (this.expanded) {
-      const width = NodeSize.width;
-      const height = this.nodeHeight;
-
-      this.body.set({
-        width,
-        height,
-        fill: this.getFillColor(),
-        shadow: this.getShadow(),
-      });
-      this.body.setCoords();
-      this.group.removeWithUpdate(this.stats as fabric.Group);
-      this.stats = undefined;
-    } else {
       this.stats = getStats(
         this.canvas,
         this.data.stats!,
@@ -184,18 +184,30 @@ export class ConnectionNodeShape implements Shape {
       this.expandedNodeHeight =
         this.nodeHeight + this.stats.getScaledHeight() + NodeSize.padding * 2;
 
-      const width = NodeSize.expandedWidth;
-      const height = this.expandedNodeHeight;
-      this.body.set({
-        width,
-        height,
-        fill: this.getFillColor(),
-        shadow: this.getShadow(),
-      });
+      width = NodeSize.expandedWidth;
+      height = this.expandedNodeHeight;
 
-      this.body.setCoords();
       this.group.addWithUpdate(this.stats);
+    } else {
+      width = NodeSize.width;
+      height = this.nodeHeight;
+
+      this.group.removeWithUpdate(this.stats as fabric.Group);
+      this.stats = undefined;
     }
+
+    const completeRegroup = initRegroup(this.canvas, this.group);
+    this.body.set({
+      width,
+      height,
+      fill: this.getFillColor(),
+      shadow: this.getShadow(),
+    });
+    id.set({ width: width - ID_PADDING });
+    title.set({
+      left: (this.body.left || 0) + (this.body.width || 0) / 2 - titleWidth / 2,
+    });
+    completeRegroup();
   }
 
   private isExpandable() {

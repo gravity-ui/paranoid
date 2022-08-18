@@ -10,36 +10,34 @@ import { GroupControls } from "../../../constants";
 import { TreeNode } from "../../../tree";
 import { ParanoidEmmiter } from "../../../event-emmiter";
 import { NodeSize } from "./constants";
-import { getStage } from "./stage";
 import { getTitle } from "./title";
 
 export class ResultNodeShape implements Shape {
-  private readonly canvas: fabric.Canvas;
+  // private readonly canvas: fabric.Canvas;
   private readonly coords: Coordinates;
-  private readonly treeNode: TreeNode;
+  // private readonly treeNode: TreeNode;
   private readonly opts: ParanoidOpts;
-  private readonly em: ParanoidEmmiter;
+  // private readonly em: ParanoidEmmiter;
   private data: ExplainPlanNodeData;
   private objects: fabric.Object[];
   private body: fabric.Object;
   private group: fabric.Group;
-  private expanded = false;
   private shadow: fabric.Shadow;
   private hoverShadow: fabric.Shadow;
   private nodeHeight = 0;
 
   constructor(
-    canvas: fabric.Canvas,
+    _canvas: fabric.Canvas,
     coords: Coordinates,
     treeNode: TreeNode,
     opts: ParanoidOpts,
-    em: ParanoidEmmiter
+    _em: ParanoidEmmiter
   ) {
-    this.canvas = canvas;
+    // this.canvas = canvas;
     this.coords = coords;
-    this.treeNode = treeNode;
+    // this.treeNode = treeNode;
     this.opts = opts;
-    this.em = em;
+    // this.em = em;
     this.data = _.get(treeNode, ["data", "data"]);
 
     this.shadow = new fabric.Shadow({
@@ -57,7 +55,6 @@ export class ResultNodeShape implements Shape {
     this.setShapeObjectsCoords();
     this.body = this.prepareNodeBody();
     this.group = this.createGroup();
-    this.initListeners();
   }
 
   getShape() {
@@ -80,15 +77,7 @@ export class ResultNodeShape implements Shape {
     return this.hoverShadow;
   }
 
-  toggleHighlight(highlight: boolean) {
-    if (!this.expanded) {
-      this.body.set({
-        fill: highlight ? this.getHoverFillColor() : this.getFillColor(),
-        shadow: this.getHoverShadow(),
-      });
-    }
-    this.canvas.requestRenderAll();
-  }
+  toggleHighlight() {}
 
   private prepareNodeBody() {
     const colors = this.opts.colors;
@@ -102,28 +91,23 @@ export class ResultNodeShape implements Shape {
       height: this.nodeHeight,
       fill: this.getFillColor(),
       stroke: colors?.nodeShadow,
-      rx: NodeSize.borderRadius,
-      ry: NodeSize.borderRadius,
       shadow: this.getShadow(),
       hoverCursor: "default",
     });
   }
 
   private prepareShapeObjects() {
-    const stage = getStage("Result", this.opts.colors);
     const title = getTitle([this.data.name || ""], this.opts.colors);
 
-    return [stage, title];
+    return [title];
   }
 
   private setShapeObjectsCoords() {
-    const [stage, title] = this.objects;
+    const [title] = this.objects;
     const top = NodeSize.padding;
-    const left = NodeSize.padding;
-    const titleTop = top + stage.getScaledHeight() + NodeSize.textOffset;
+    const titleWidth = title.getScaledWidth();
 
-    stage.set({ left, top });
-    title.set({ left, top: titleTop });
+    title.set({ left: NodeSize.width / 2 - titleWidth / 2, top });
   }
 
   private createGroup() {
@@ -132,22 +116,6 @@ export class ResultNodeShape implements Shape {
       top,
       left,
       ...GroupControls,
-    });
-  }
-
-  private initListeners() {
-    this.initHover();
-  }
-
-  private initHover() {
-    this.group.on("mouseover", () => {
-      this.em.dispatch("node:mouseover", this.treeNode);
-      this.toggleHighlight(true);
-    });
-
-    this.group.on("mouseout", () => {
-      this.em.dispatch("node:mouseout", this.treeNode);
-      this.toggleHighlight(false);
     });
   }
 }
