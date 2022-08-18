@@ -88,7 +88,7 @@ export class StageNodeShape implements Shape {
     if (this.isExpandable() && !this.expanded) {
       this.body.set({
         fill: highlight ? this.getHoverFillColor() : this.getFillColor(),
-        shadow: this.getHoverShadow(),
+        shadow: highlight ? this.getHoverShadow() : this.getShadow(),
       });
     }
     this.canvas.requestRenderAll();
