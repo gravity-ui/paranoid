@@ -8,6 +8,6 @@ export const NodeSize = {
   titleLineHeight: NodeSizes.titleLineHeight,
   textFontSize: NodeSizes.titleFontSize,
   textLineHeight: NodeSizes.titleLineHeight,
-  padding: 12,
+  padding: 16,
   textOffset: 8,
 };
