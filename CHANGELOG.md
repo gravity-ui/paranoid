@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/yandex-cloud/paranoid/compare/v1.2.0...v1.2.1) (2022-08-29)
+
+
+### Bug Fixes
+
+* ydb explain view fixes ([#18](https://github.com/yandex-cloud/paranoid/issues/18)) ([32659b5](https://github.com/yandex-cloud/paranoid/commit/32659b5155f8a26513df4712350a55c4ce1082ee))
+
 ## [1.2.0](https://github.com/yandex-cloud/paranoid/compare/v1.1.0...v1.2.0) (2022-08-18)
 
 
