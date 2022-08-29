@@ -7,9 +7,9 @@ export function createId(
   isExpandable: boolean,
   colors: EnhancedColors
 ) {
-  return new fabric.Textbox(`${id ?? ""}`, {
-    fontSize: 10,
-    lineHeight: 1.2,
+  return new fabric.Textbox(id ? `#${id}` : "", {
+    fontSize: 12,
+    lineHeight: 14,
     textAlign: "right",
     fontFamily: "YS Text",
     fill: colors.getCommonColor("text-secondary"),
