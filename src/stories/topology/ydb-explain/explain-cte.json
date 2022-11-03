@@ -1,0 +1,234 @@
+{
+    "Plan": {
+        "Node Type": "Query",
+        "PlanNodeType": "Query",
+        "Plans": [
+            {
+                "PlanNodeId": 4,
+                "Node Type": "Precompute_0",
+                "PlanNodeType": "Materialize",
+                "Subplan Name": "CTE tx_result_binding_0_0",
+                "Parent Relationship": "InitPlan",
+                "Plans": [
+                    {
+                        "PlanNodeId": 3,
+                        "Node Type": "Collect",
+                        "Plans": [
+                            {
+                                "PlanNodeId": 2,
+                                "Node Type": "UnionAll",
+                                "PlanNodeType": "Connection",
+                                "Plans": [
+                                    {
+                                        "PlanNodeId": 1,
+                                        "Node Type": "TableFullScan",
+                                        "Tables": [
+                                            "sales/order_items"
+                                        ],
+                                        "Operators": [
+                                            {
+                                                "ReadRange": [
+                                                    "order_id (-∞, +∞)",
+                                                    "item_id (-∞, +∞)"
+                                                ],
+                                                "Name": "TableFullScan",
+                                                "ReadColumns": [
+                                                    "product_id",
+                                                    "quantity"
+                                                ],
+                                                "Table": "sales/order_items"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "PlanNodeId": 6,
+                "Node Type": "Precompute_1",
+                "PlanNodeType": "Materialize",
+                "Subplan Name": "CTE tx_result_binding_1_0",
+                "Parent Relationship": "InitPlan",
+                "Plans": [
+                    {
+                        "PlanNodeId": 5,
+                        "CTE Name": "tx_result_binding_0_0",
+                        "Operators": [
+                            {
+                                "Predicate": "Exist(item.product_id)",
+                                "Name": "Filter"
+                            },
+                            {
+                                "Limit": "1",
+                                "Name": "Limit"
+                            }
+                        ],
+                        "Node Type": "Filter-Limit"
+                    }
+                ]
+            },
+            {
+                "PlanNodeId": 10,
+                "Node Type": "Precompute_2",
+                "PlanNodeType": "Materialize",
+                "Subplan Name": "CTE tx_result_binding_2_0",
+                "Parent Relationship": "InitPlan",
+                "Plans": [
+                    {
+                        "PlanNodeId": 9,
+                        "Node Type": "Collect",
+                        "Plans": [
+                            {
+                                "PlanNodeId": 8,
+                                "Node Type": "UnionAll",
+                                "PlanNodeType": "Connection",
+                                "Plans": [
+                                    {
+                                        "PlanNodeId": 7,
+                                        "Node Type": "InnerJoin (MapJoin)-Filter-TablePointLookup-ConstantExpr",
+                                        "CTE Name": "tx_result_binding_1_0",
+                                        "Tables": [
+                                            "production/products"
+                                        ],
+                                        "Operators": [
+                                            {
+                                                "Name": "InnerJoin (MapJoin)"
+                                            },
+                                            {
+                                                "Predicate": "Exist(item.product_id)",
+                                                "Name": "Filter"
+                                            },
+                                            {
+                                                "Name": "TablePointLookup",
+                                                "ReadColumns": [
+                                                    "brand_id",
+                                                    "product_id"
+                                                ],
+                                                "Table": "production/products"
+                                            },
+                                            {
+                                                "Iterator": "%kqp%tx_result_binding_1_0",
+                                                "Name": "Iterator"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "PlanNodeId": 12,
+                "Node Type": "Precompute_3",
+                "PlanNodeType": "Materialize",
+                "Subplan Name": "CTE tx_result_binding_3_0",
+                "Parent Relationship": "InitPlan",
+                "Plans": [
+                    {
+                        "PlanNodeId": 11,
+                        "CTE Name": "tx_result_binding_2_0",
+                        "Node Type": "Filter-Limit",
+                        "Operators": [
+                            {
+                                "Predicate": "Exist(item.p.brand_id)",
+                                "Name": "Filter"
+                            },
+                            {
+                                "Limit": "1",
+                                "Name": "Limit"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "PlanNodeId": 18,
+                "Node Type": "ResultSet_4",
+                "PlanNodeType": "ResultSet",
+                "Plans": [
+                    {
+                        "PlanNodeId": 17,
+                        "Node Type": "Limit",
+                        "Operators": [
+                            {
+                                "Limit": "1001",
+                                "Name": "Limit"
+                            }
+                        ],
+                        "Plans": [
+                            {
+                                "PlanNodeId": 16,
+                                "Node Type": "Merge",
+                                "PlanNodeType": "Connection",
+                                "SortColumns": [
+                                    "Count (Desc)"
+                                ],
+                                "Plans": [
+                                    {
+                                        "PlanNodeId": 15,
+                                        "Node Type": "TopSort-Aggregate",
+                                        "Operators": [
+                                            {
+                                                "Limit": "1001",
+                                                "Name": "TopSort",
+                                                "TopSortBy": "$28.Count"
+                                            },
+                                            {
+                                                "Name": "Aggregate"
+                                            }
+                                        ],
+                                        "Plans": [
+                                            {
+                                                "PlanNodeId": 14,
+                                                "Node Type": "HashShuffle",
+                                                "PlanNodeType": "Connection",
+                                                "KeyColumns": [
+                                                    "b.brand_name"
+                                                ],
+                                                "Plans": [
+                                                    {
+                                                        "PlanNodeId": 13,
+                                                        "Node Type": "InnerJoin (MapJoin)-Filter-TablePointLookup-ConstantExpr",
+                                                        "CTE Name": "tx_result_binding_3_0",
+                                                        "Tables": [
+                                                            "production/brands"
+                                                        ],
+                                                        "Operators": [
+                                                            {
+                                                                "Name": "InnerJoin (MapJoin)"
+                                                            },
+                                                            {
+                                                                "Predicate": "Exist(item.brand_id)",
+                                                                "Name": "Filter"
+                                                            },
+                                                            {
+                                                                "Name": "TablePointLookup",
+                                                                "ReadColumns": [
+                                                                    "brand_id",
+                                                                    "brand_name"
+                                                                ],
+                                                                "Table": "production/brands"
+                                                            },
+                                                            {
+                                                                "Iterator": "%kqp%tx_result_binding_3_0",
+                                                                "Name": "Iterator"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

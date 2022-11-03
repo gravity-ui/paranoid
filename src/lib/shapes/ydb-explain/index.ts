@@ -6,6 +6,7 @@ import { StageNodeShape } from "./stage-node";
 import { ConnectionNodeShape } from "./connection-node";
 import { ResultNodeShape } from "./result-node";
 import { QueryNodeShape } from "./query-node";
+import { MaterializeNodeShape } from "./materialize-node";
 
 function isConnectionNode(node: TreeNode) {
   const data = _.get(node, ["data", "data"]);
@@ -25,6 +26,12 @@ function isQueryNode(node: TreeNode) {
   return data?.type === "query";
 }
 
+function isMaterializeNode(node: TreeNode) {
+  const data = _.get(node, ["data", "data"]);
+
+  return data?.type === "materialize";
+}
+
 export function getYdbPlanNodeShape(
   canvas: fabric.Canvas,
   coords: Coordinates,
@@ -38,6 +45,8 @@ export function getYdbPlanNodeShape(
     return new ResultNodeShape(canvas, coords, node, opts, em);
   } else if (isQueryNode(node)) {
     return new QueryNodeShape(canvas, coords, node, opts, em);
+  } else if (isMaterializeNode(node)) {
+    return new MaterializeNodeShape(canvas, coords, node, opts, em);
   } else {
     return new StageNodeShape(canvas, coords, node, opts, em);
   }

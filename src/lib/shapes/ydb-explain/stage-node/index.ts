@@ -13,6 +13,7 @@ import { createId, ID_PADDING } from "../common";
 import { NodeSize } from "./constants";
 import { getTitle } from "./title";
 import { getTables } from "./tables";
+import { getCTE } from "./cte";
 import { getStats } from "../../postgresql-explain/node/stats";
 
 export class StageNodeShape implements Shape {
@@ -121,13 +122,14 @@ export class StageNodeShape implements Shape {
       this.opts.colors
     );
     const tables = getTables(this.data.tables || [], this.opts.colors);
+    const cte = getCTE(this.data.cte || "", this.opts.colors);
 
-    return [id, title, tables];
+    return [id, title, tables, cte];
   }
 
   private setShapeObjectsCoords() {
-    const [id, title, tables] = this.objects;
-    const top = NodeSize.padding;
+    const [id, title, tables, cte] = this.objects;
+    let top = NodeSize.padding;
     const left = NodeSize.padding;
 
     id.set({
@@ -137,12 +139,16 @@ export class StageNodeShape implements Shape {
         (this.expanded ? NodeSize.expandedWidth : NodeSize.width) - ID_PADDING,
     });
     title.set({ left, top });
+    top = top + title.getScaledHeight();
     tables.set({
       left,
       top:
-        top +
-        title.getScaledHeight() +
-        ((tables as fabric.Group).size() === 0 ? 0 : NodeSize.textOffset),
+        top + ((tables as fabric.Group).size() === 0 ? 0 : NodeSize.textOffset),
+    });
+    top = top + tables.getScaledHeight();
+    cte.set({
+      left,
+      top: top + ((cte as fabric.Group).size() === 0 ? 0 : NodeSize.textOffset),
     });
   }
 

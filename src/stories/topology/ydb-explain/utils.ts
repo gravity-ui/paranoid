@@ -91,6 +91,8 @@ function getNodeType(plan: Plan) {
       return "connection";
     case "ResultSet":
       return "result";
+    case "Materialize":
+      return "materialize";
     case "Query":
       return "query";
     default:
@@ -102,36 +104,30 @@ export function parseExplain(explain: RootPlan) {
   const nodes: GraphNode[] = [];
   const links: Link[] = [];
 
-  function parsePlans(plans: Plan[] = [], from: string) {
+  function parsePlans(plans: Plan[] = [], from?: string) {
     plans.forEach((p) => {
       const node: GraphNode<ExplainPlanNodeData> = {
         name: String(p.PlanNodeId),
         data: {
           id: p.PlanNodeId,
           type: getNodeType(p),
-          name: p["Node Type"],
+          name: p["Subplan Name"] || p["Node Type"],
           operators: p.Operators?.map((o) => o.Name),
           stats: prepareStats(p),
           tables: p.Tables,
+          cte: p["CTE Name"],
         },
       };
       nodes.push(node);
-      links.push({ from, to: node.name });
+      if (from) {
+        links.push({ from, to: node.name });
+      }
       parsePlans(p.Plans, node.name);
     });
   }
 
   const rootPlan = explain.Plan;
-  const rootNode: GraphNode<ExplainPlanNodeData> = {
-    name: String(rootPlan.PlanNodeId),
-    data: {
-      id: rootPlan.PlanNodeId,
-      type: getNodeType(rootPlan),
-      name: rootPlan["Node Type"],
-    },
-  };
-  nodes.push(rootNode);
-  parsePlans(rootPlan.Plans, rootNode.name);
+  parsePlans(rootPlan.Plans);
 
   return {
     nodes,

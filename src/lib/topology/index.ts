@@ -84,8 +84,8 @@ export class Topology {
     let maxBottom = canvHeight;
     let maxRight = canvWidth;
 
-    let treeTop = this.opts.initialTop;
-    const treeLeft = this.opts.initialLeft;
+    const treeTop = this.opts.initialTop;
+    let treeLeft = this.opts.initialLeft;
     this.trees.forEach((tree) => {
       tree.setCanvas(this.canvas);
 
@@ -98,18 +98,18 @@ export class Topology {
         this.em
       );
 
-      treeTop = bottom + NODE_MARGIN_BOTTOM;
+      treeLeft = right + NODE_MARGIN_BOTTOM;
 
       maxBottom = Math.max(bottom, maxBottom);
       maxRight = Math.max(right, maxRight);
 
-      const links = getTopologyLinks(this.parser, this.opts);
-
       this.nodes.push(...nodes);
-      this.links.push(...links);
-      this.canvas.add(...links, ...nodes);
+      this.canvas.add(...nodes);
     });
 
+    const links = getTopologyLinks(this.parser, this.opts);
+    this.links.push(...links);
+    this.canvas.add(...links);
     this.bringNodesToFront();
   }
 
