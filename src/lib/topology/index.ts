@@ -7,7 +7,7 @@ import { getCanvasObjects as getTopologyObjects } from "../layout/topology";
 import { Tree } from "../tree";
 import { getTopologyLinks } from "../links";
 import { ParanoidEmmiter } from "../event-emmiter";
-import { NODE_MARGIN_BOTTOM } from "../constants";
+import { NODE_MARGIN } from "../constants";
 
 export class Topology {
   private canvas: fabric.Canvas;
@@ -98,7 +98,7 @@ export class Topology {
         this.em
       );
 
-      treeLeft = right + NODE_MARGIN_BOTTOM;
+      treeLeft = right + NODE_MARGIN;
 
       maxBottom = Math.max(bottom, maxBottom);
       maxRight = Math.max(right, maxRight);
