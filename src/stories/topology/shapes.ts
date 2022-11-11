@@ -9,6 +9,7 @@ import {
   NodeSizes,
   fabric,
   ParanoidEmmiter,
+  NODE_FONT_FAMILY,
 } from "../../lib";
 
 class DefaultShape implements Shape {
@@ -101,7 +102,7 @@ class DefaultShape implements Shape {
       lineHeight: NodeSizes.titleLineHeight,
       left: NodeSizes.paddingLeft,
       top: NodeSizes.paddingTop,
-      fontFamily: "YS Text",
+      fontFamily: NODE_FONT_FAMILY,
       fill: this.opts.colors?.titleColor,
     });
 

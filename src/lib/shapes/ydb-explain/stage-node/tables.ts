@@ -1,5 +1,5 @@
 import { EnhancedColors, fabric } from "../../../models";
-import { GroupControls } from "../../../constants";
+import { GroupControls, NODE_FONT_FAMILY } from "../../../constants";
 import { NodeSize } from "./constants";
 
 export function getTables(tables: string[], colors: EnhancedColors) {
@@ -14,7 +14,7 @@ export function getTables(tables: string[], colors: EnhancedColors) {
   const key = new fabric.Text("Tables:", {
     fontSize: NodeSize.textFontSize,
     lineHeight: NodeSize.textLineHeight,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.getCommonColor("text-secondary"),
     hoverCursor: "pointer",
   });
@@ -27,7 +27,7 @@ export function getTables(tables: string[], colors: EnhancedColors) {
     width: valueWidth,
     fontSize: NodeSize.textFontSize,
     lineHeight: NodeSize.textLineHeight,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.getCommonColor("text-primary"),
     splitByGrapheme: true,
     hoverCursor: "pointer",

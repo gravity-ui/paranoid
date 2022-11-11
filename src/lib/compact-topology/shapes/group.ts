@@ -3,7 +3,7 @@ import { fabric } from "fabric";
 import { GroupSizes, NodeSizes, AnchorSizes } from "./constants";
 import renderAnchor from "./anchor";
 import { Colors } from "../../models";
-import { GroupControls } from "../../constants";
+import { GroupControls, NODE_FONT_FAMILY } from "../../constants";
 
 export interface GroupDimensions {
   left: number;
@@ -24,7 +24,7 @@ export default function renderGroup(
     lineHeight: 18,
     left: GroupSizes.paddingLeft,
     top: GroupSizes.paddingTop,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.titleColor,
   });
 

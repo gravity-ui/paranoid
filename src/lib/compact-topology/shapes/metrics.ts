@@ -1,6 +1,7 @@
 import { fabric } from "fabric";
 import { NodeSizes } from "./constants";
 import { Metric, EnhancedColors } from "../../models";
+import { NODE_FONT_FAMILY } from "../../constants";
 
 function getFillColor(metric: Metric, colors: EnhancedColors) {
   switch (metric.theme) {
@@ -27,13 +28,13 @@ export default function renderMetrics(
     const nameNode = new fabric.Text(curMetric.name + ": ", {
       fontSize: NodeSizes.textFontSize,
       lineHeight: NodeSizes.textLineHeight,
-      fontFamily: "YS Text",
+      fontFamily: NODE_FONT_FAMILY,
       fill: colors.textColor,
     });
     const valueNode = new fabric.Text(curMetric.value, {
       fontSize: NodeSizes.textFontSize,
       lineHeight: NodeSizes.textLineHeight,
-      fontFamily: "YS Text",
+      fontFamily: NODE_FONT_FAMILY,
       fill: getFillColor(curMetric, colors),
       left: nameNode.width ?? 0,
     });

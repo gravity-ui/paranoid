@@ -1,5 +1,5 @@
 import { EnhancedColors, fabric } from "../../../models";
-import { GroupControls } from "../../../constants";
+import { GroupControls, NODE_FONT_FAMILY } from "../../../constants";
 import {
   createMergeIcon,
   createUnionIcon,
@@ -17,7 +17,7 @@ export function getTitle(
   const text = new fabric.Text(name, {
     fontSize: NodeSize.textFontSize,
     lineHeight: NodeSize.textFontSize,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.getCommonColor("text-misc"),
     originY: "center",
   });

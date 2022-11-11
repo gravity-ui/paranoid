@@ -1,4 +1,5 @@
 import { Colors, fabric } from "../../../models";
+import { NODE_FONT_FAMILY } from "../../../constants";
 import { NodeSize } from "./constants";
 import _ from "lodash";
 export function getPercentage(timePercentage: string, colors: Colors) {
@@ -8,7 +9,7 @@ export function getPercentage(timePercentage: string, colors: Colors) {
     lineHeight: NodeSize.textLineHeight,
     left: 0,
     top: 0,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors?.titleColor,
   });
 }

@@ -1,7 +1,0 @@
-html, body, #root {
-    height: calc(100% - 16px); /* margin-top: 8px + margin-bottom: 8px */
-}
-
-#root div {
-    height: 100%;
-}

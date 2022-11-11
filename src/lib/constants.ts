@@ -36,6 +36,7 @@ const NODE_HEIGHT = 58;
 const NODE_BORDER_RADIUS = 4;
 const NODE_PADDING = 8;
 export const NODE_MARGIN = 15;
+export const NODE_FONT_FAMILY = "Arial, sans-serif";
 
 const TITLE_FONT_SIZE = 13;
 const TITLE_LINE_HEIGHT = 1.38; // 18px

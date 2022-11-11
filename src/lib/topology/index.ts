@@ -2,7 +2,6 @@ import { fabric } from "fabric";
 import { canvasId, getCanvas } from "../canvas";
 import { Colors, Data, ParanoidOpts, Shapes } from "../models";
 import Parser from "../parser";
-import { loadFonts } from "../utils";
 import { getCanvasObjects as getTopologyObjects } from "../layout/topology";
 import { Tree } from "../tree";
 import { getTopologyLinks } from "../links";
@@ -32,7 +31,7 @@ export class Topology {
   }
 
   render() {
-    loadFonts().then(() => {
+    requestAnimationFrame(() => {
       this.trees = this.parser.parseData();
       this.renderIntoCanvas();
 

@@ -1,4 +1,5 @@
 import { EnhancedColors, fabric } from "../../../models";
+import { NODE_FONT_FAMILY } from "../../../constants";
 import { NodeSize } from "./constants";
 
 export function getStage(name: string, colors: EnhancedColors) {
@@ -7,7 +8,7 @@ export function getStage(name: string, colors: EnhancedColors) {
     lineHeight: NodeSize.textLineHeight,
     left: 0,
     top: 0,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.getCommonColor("text-secondary"),
     hoverCursor: "pointer",
   });

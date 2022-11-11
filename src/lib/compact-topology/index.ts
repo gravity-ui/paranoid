@@ -4,7 +4,6 @@ import Parser, { GraphGroupNode, Source } from "../parser";
 import { Data, ParanoidOpts } from "../models";
 import renderLine from "./shapes/line";
 
-import { loadFonts } from "../utils";
 import { NODE_MARGIN_BOTTOM } from "./shapes/constants";
 import { NodeType } from "../constants";
 import { TreeNode } from "../tree";
@@ -37,7 +36,7 @@ export class CompactTopology {
   }
 
   renderCompactTopology() {
-    loadFonts().then(() => {
+    requestAnimationFrame(() => {
       const trees = this.parser.parseData();
 
       let treeTop: number;

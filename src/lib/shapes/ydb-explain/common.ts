@@ -1,4 +1,5 @@
 import { EnhancedColors, fabric } from "../../models";
+import { NODE_FONT_FAMILY } from "../../constants";
 
 export const ID_PADDING = 4;
 
@@ -11,7 +12,7 @@ export function createId(
     fontSize: 12,
     lineHeight: 14,
     textAlign: "right",
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.getCommonColor("text-secondary"),
     hoverCursor: isExpandable ? "pointer" : "default",
   });
