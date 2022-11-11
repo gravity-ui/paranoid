@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/yandex-cloud/paranoid/compare/v1.2.1...v1.3.0) (2022-11-11)
+
+
+### Features
+
+* add support for explain plan CTE blocks ([#20](https://github.com/yandex-cloud/paranoid/issues/20)) ([42dd293](https://github.com/yandex-cloud/paranoid/commit/42dd293ad606c117ce5f70e679c854cf934fa4d6))
+* remove YS Text ([#21](https://github.com/yandex-cloud/paranoid/issues/21)) ([fd6fbdc](https://github.com/yandex-cloud/paranoid/commit/fd6fbdc9161896cf691078c771c674264b57d872))
+
 ## [1.2.1](https://github.com/yandex-cloud/paranoid/compare/v1.2.0...v1.2.1) (2022-08-29)
 
 
