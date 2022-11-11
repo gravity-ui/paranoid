@@ -1,4 +1,5 @@
 import { Colors, fabric } from "../../../models";
+import { NODE_FONT_FAMILY } from "../../../constants";
 import { NodeSize } from "./constants";
 
 export function getTitle(name: string, colors: Colors) {
@@ -7,7 +8,7 @@ export function getTitle(name: string, colors: Colors) {
     lineHeight: NodeSize.titleLineHeight,
     left: 0,
     top: 0,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors?.titleColor,
   });
 }

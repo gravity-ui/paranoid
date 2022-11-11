@@ -1,7 +1,7 @@
 import { fabric } from "fabric";
 
 import { NodeSizes, AnchorSizes, CLIPBOARD_WIDTH } from "./constants";
-import { GroupControls } from "../../constants";
+import { GroupControls, NODE_FONT_FAMILY } from "../../constants";
 import renderAnchor from "./anchor";
 import renderMetrics from "./metrics";
 import renderClipboard from "./clipboard";
@@ -80,7 +80,7 @@ export default function renderNode(
     lineHeight: NodeSizes.titleLineHeight,
     left: NodeSizes.paddingLeft,
     top: NodeSizes.paddingTop,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.titleColor,
     hoverCursor: typeof onTitleClick === "function" ? "pointer" : "default",
   });
@@ -109,7 +109,7 @@ export default function renderNode(
       NodeSizes.paddingTop +
       title.getBoundingRect().height +
       NodeSizes.metaMarginTop,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.textColor,
   });
 
@@ -143,7 +143,7 @@ export default function renderNode(
       fontSize: NodeSizes.textFontSize,
       lineHeight: NodeSizes.textLineHeight,
       left: 16,
-      fontFamily: "YS Text",
+      fontFamily: NODE_FONT_FAMILY,
       fill: colors.textColor,
     });
 

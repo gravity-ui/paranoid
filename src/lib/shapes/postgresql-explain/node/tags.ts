@@ -1,5 +1,5 @@
 import { Colors, fabric, TopologyNodeTag } from "../../../models";
-import { GroupControls } from "../../../constants";
+import { GroupControls, NODE_FONT_FAMILY } from "../../../constants";
 import { NodeSize } from "./constants";
 
 function getTag(
@@ -13,7 +13,7 @@ function getTag(
     top: NodeSize.textOffset / 2,
     fontSize: NodeSize.textFontSize,
     lineHeight: NodeSize.textLineHeight,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: theme === "danger" ? colors?.error : colors?.warning,
   });
 

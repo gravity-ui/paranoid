@@ -6,7 +6,7 @@ import {
   TopologyNodeDataStatsSection,
   TopologyNodeDataStatsItem,
 } from "../../../models";
-import { GroupControls } from "../../../constants";
+import { GroupControls, NODE_FONT_FAMILY } from "../../../constants";
 import { NodeSize } from "./constants";
 
 interface StatsContent {
@@ -43,7 +43,7 @@ class StatsController {
     this.textProps = {
       fontSize: NodeSize.textFontSize,
       lineHeight: NodeSize.textLineHeight,
-      fontFamily: "YS Text",
+      fontFamily: NODE_FONT_FAMILY,
       fill: colors?.titleColor,
     };
     this.selectedGroup = stats[0].group;

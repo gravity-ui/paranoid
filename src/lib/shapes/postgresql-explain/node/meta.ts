@@ -1,5 +1,5 @@
 import { Colors, fabric } from "../../../models";
-import { GroupControls } from "../../../constants";
+import { GroupControls, NODE_FONT_FAMILY } from "../../../constants";
 import { NodeSize } from "./constants";
 
 export interface NodeMeta {
@@ -27,7 +27,7 @@ export function getMeta(meta: NodeMeta | undefined, colors: Colors) {
       lineHeight: NodeSize.textLineHeight,
       top,
       left: NodeSize.padding,
-      fontFamily: "YS Text",
+      fontFamily: NODE_FONT_FAMILY,
       fill: colors?.textColor,
     });
     groupItems.push(keyText);
@@ -45,7 +45,7 @@ export function getMeta(meta: NodeMeta | undefined, colors: Colors) {
       left,
       top: nextTop,
       width,
-      fontFamily: "YS Text",
+      fontFamily: NODE_FONT_FAMILY,
       fill: colors?.titleColor,
       splitByGrapheme: true,
     });

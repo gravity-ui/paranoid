@@ -1,5 +1,6 @@
 import { EnhancedColors, fabric } from "../../../models";
 import { NodeSize } from "./constants";
+import { NODE_FONT_FAMILY } from "../../../constants";
 
 export function getTitle(
   lines: string[],
@@ -9,7 +10,7 @@ export function getTitle(
   return new fabric.Text(lines.join("\n"), {
     fontSize: NodeSize.textFontSize,
     lineHeight: NodeSize.textLineHeight,
-    fontFamily: "YS Text",
+    fontFamily: NODE_FONT_FAMILY,
     fill: colors.getCommonColor("text-primary"),
     hoverCursor: isExpandable ? "pointer" : "default",
   });

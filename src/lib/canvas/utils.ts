@@ -13,7 +13,7 @@ export function getControllersStyle(colors: Colors) {
         height: 36px;
         width: 36px;
         line-height: 13px;
-        font-family: YS Text;
+        font-family: Arial, sans-serif;
         font-size: 13px;
         text-align: center;
         padding: 0;
