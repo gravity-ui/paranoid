@@ -35,7 +35,7 @@ const NODE_WIDTH = 239;
 const NODE_HEIGHT = 58;
 const NODE_BORDER_RADIUS = 4;
 const NODE_PADDING = 8;
-export const NODE_MARGIN_BOTTOM = 15;
+export const NODE_MARGIN = 15;
 
 const TITLE_FONT_SIZE = 13;
 const TITLE_LINE_HEIGHT = 1.38; // 18px

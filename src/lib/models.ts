@@ -145,9 +145,10 @@ export interface TopologyNodeData {
 
 export interface ExplainPlanNodeData {
   id?: number;
-  type: "query" | "result" | "stage" | "connection";
+  type: "query" | "result" | "stage" | "connection" | "materialize";
   name?: string;
   operators?: string[];
   tables?: string[];
+  cte?: string;
   stats?: TopologyNodeDataStats[];
 }

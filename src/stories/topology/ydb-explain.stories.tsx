@@ -7,6 +7,7 @@ import explain2 from "./ydb-explain/explain-2.json";
 import explain3 from "./ydb-explain/explain-3.json";
 import explain4 from "./ydb-explain/explain-4.json";
 import explain5 from "./ydb-explain/explain-5.json";
+import explainCTE from "./ydb-explain/explain-cte.json";
 
 const ydbExplainStories = storiesOf("YDB explain", module);
 
@@ -28,4 +29,8 @@ ydbExplainStories.add("Explain 4", () => {
 
 ydbExplainStories.add("Explain 5", () => {
   return <Story data={parseExplain(explain5)} />;
+});
+
+ydbExplainStories.add("Explain CTE", () => {
+  return <Story data={parseExplain(explainCTE)} />;
 });
