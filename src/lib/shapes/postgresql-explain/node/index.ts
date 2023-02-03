@@ -96,7 +96,7 @@ export class TopolgyNodeShape implements Shape {
         const colors = this.opts.colors;
 
         // @ts-ignore
-    const [__, time, percentage] = this.objects; /* eslint-disable-line */
+        const [__, time, percentage] = this.objects; /* eslint-disable-line */
         const expandOffset = NodeSize.expandedWidth - NodeSize.width;
 
         if (this.expanded) {
