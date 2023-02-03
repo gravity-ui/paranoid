@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/gravity-ui/paranoid/compare/v1.3.0...v1.4.0) (2023-02-03)
+
+
+### chore
+
+* change package organization ([#23](https://github.com/gravity-ui/paranoid/issues/23)) ([920f457](https://github.com/gravity-ui/paranoid/commit/920f4572f2bdc5b297f7440824c3512a8fa86d98))
+
 ## [1.3.0](https://github.com/gravity-ui/paranoid/compare/v1.2.1...v1.3.0) (2022-11-11)
 
 
