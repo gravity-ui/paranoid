@@ -1,7 +1,7 @@
-import { Colors } from "../models";
+import {Colors} from '../models';
 
 export function getControllersStyle(colors: Colors) {
-  return `
+    return `
     .paranoid-controls {
         position: absolute;
         top: 10px;

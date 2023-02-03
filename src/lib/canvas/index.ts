@@ -1,160 +1,162 @@
-import { fabric } from "fabric";
-import { Colors, ParanoidOpts } from "../models";
-import { getControllersStyle } from "./utils";
+import {fabric} from 'fabric';
+
+import {Colors, ParanoidOpts} from '../models';
+
+import {getControllersStyle} from './utils';
 
 function getButton(text: string, title: string) {
-  const button = document.createElement("button");
-  button.innerText = text;
-  button.className = `paranoid-button paranoid-button_${title}`;
+    const button = document.createElement('button');
+    button.innerText = text;
+    button.className = `paranoid-button paranoid-button_${title}`;
 
-  return button;
+    return button;
 }
 
-export const canvasId = "ParanoidC";
+export const canvasId = 'ParanoidC';
 
 function initCanvas(element: HTMLElement, opts: ParanoidOpts) {
-  const canv = document.createElement("canvas");
-  canv.setAttribute("id", canvasId);
-  canv.setAttribute("width", String(element.offsetWidth));
-  canv.setAttribute("height", String(element.offsetHeight));
-  element.appendChild(canv);
-  const colors = opts.colors || {};
+    const canv = document.createElement('canvas');
+    canv.setAttribute('id', canvasId);
+    canv.setAttribute('width', String(element.offsetWidth));
+    canv.setAttribute('height', String(element.offsetHeight));
+    element.appendChild(canv);
+    const colors = opts.colors || {};
 
-  const canvas = new fabric.Canvas(canvasId, {
-    selection: false,
-    backgroundColor: colors.fill,
-    defaultCursor: "grab",
-  });
+    const canvas = new fabric.Canvas(canvasId, {
+        selection: false,
+        backgroundColor: colors.fill,
+        defaultCursor: 'grab',
+    });
 
-  return canvas;
+    return canvas;
 }
 
 function getControllers(
-  plus: HTMLButtonElement,
-  minus: HTMLButtonElement,
-  zoom: HTMLButtonElement,
-  colors: Colors
+    plus: HTMLButtonElement,
+    minus: HTMLButtonElement,
+    zoom: HTMLButtonElement,
+    colors: Colors,
 ) {
-  const buttons = document.createElement("div");
+    const buttons = document.createElement('div');
 
-  buttons.className = "paranoid-controls";
+    buttons.className = 'paranoid-controls';
 
-  const style = document.createElement("style");
-  style.innerText = getControllersStyle(colors);
+    const style = document.createElement('style');
+    style.innerText = getControllersStyle(colors);
 
-  buttons.appendChild(style);
-  buttons.appendChild(minus);
-  buttons.appendChild(plus);
-  buttons.appendChild(zoom);
+    buttons.appendChild(style);
+    buttons.appendChild(minus);
+    buttons.appendChild(plus);
+    buttons.appendChild(zoom);
 
-  return buttons;
+    return buttons;
 }
 
 function initZoom(
-  canvas: fabric.Canvas,
-  plus: HTMLButtonElement,
-  minus: HTMLButtonElement,
-  normalZoom: HTMLButtonElement,
-  opts: ParanoidOpts
+    canvas: fabric.Canvas,
+    plus: HTMLButtonElement,
+    minus: HTMLButtonElement,
+    normalZoom: HTMLButtonElement,
+    opts: ParanoidOpts,
 ) {
-  const minZoom = opts.minZoom || 0.2;
-  const zoomStep = opts.zoomStep || 0.2;
-  const maxZoom = opts.maxZoom || 2;
-  const startZoom = opts.startZoom || 1;
+    const minZoom = opts.minZoom || 0.2;
+    const zoomStep = opts.zoomStep || 0.2;
+    const maxZoom = opts.maxZoom || 2;
+    const startZoom = opts.startZoom || 1;
 
-  canvas.setZoom(startZoom);
+    canvas.setZoom(startZoom);
 
-  minus.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    minus.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-    let zoom = canvas.getZoom();
+        let zoom = canvas.getZoom();
 
-    zoom -= zoomStep;
+        zoom -= zoomStep;
 
-    if (zoom < minZoom) {
-      zoom = minZoom;
-    }
+        if (zoom < minZoom) {
+            zoom = minZoom;
+        }
 
-    canvas.setZoom(zoom);
-  });
+        canvas.setZoom(zoom);
+    });
 
-  plus.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    plus.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-    let zoom = canvas.getZoom();
+        let zoom = canvas.getZoom();
 
-    zoom += zoomStep;
+        zoom += zoomStep;
 
-    if (zoom > maxZoom) {
-      zoom = maxZoom;
-    }
+        if (zoom > maxZoom) {
+            zoom = maxZoom;
+        }
 
-    canvas.setZoom(zoom);
-  });
+        canvas.setZoom(zoom);
+    });
 
-  normalZoom.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    normalZoom.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-    canvas.setZoom(1);
-  });
+        canvas.setZoom(1);
+    });
 }
 
 function initPan(canvas: fabric.Canvas) {
-  let isDragging = false;
-  let lastPosX = 0;
-  let lastPosY = 0;
+    let isDragging = false;
+    let lastPosX = 0;
+    let lastPosY = 0;
 
-  canvas.on("mouse:down", (event) => {
-    if (!event.target) {
-      canvas.setCursor("grabbing");
-      isDragging = true;
-      lastPosX = event.pointer!.x;
-      lastPosY = event.pointer!.y;
-    }
-  });
+    canvas.on('mouse:down', (event) => {
+        if (!event.target) {
+            canvas.setCursor('grabbing');
+            isDragging = true;
+            lastPosX = event.pointer!.x;
+            lastPosY = event.pointer!.y;
+        }
+    });
 
-  canvas.on("mouse:move", (event) => {
-    if (isDragging) {
-      canvas.viewportTransform![4] += event.pointer!.x - lastPosX;
-      canvas.viewportTransform![5] += event.pointer!.y - lastPosY;
-      canvas.setCursor("grabbing");
-      canvas.getObjects().forEach((object) => object.setCoords());
-      canvas.requestRenderAll();
-      lastPosX = event.pointer!.x;
-      lastPosY = event.pointer!.y;
-    }
-  });
+    canvas.on('mouse:move', (event) => {
+        if (isDragging) {
+            canvas.viewportTransform![4] += event.pointer!.x - lastPosX;
+            canvas.viewportTransform![5] += event.pointer!.y - lastPosY;
+            canvas.setCursor('grabbing');
+            canvas.getObjects().forEach((object) => object.setCoords());
+            canvas.requestRenderAll();
+            lastPosX = event.pointer!.x;
+            lastPosY = event.pointer!.y;
+        }
+    });
 
-  canvas.on("mouse:up", () => {
-    if (isDragging) {
-      canvas.setCursor("grab");
-      isDragging = false;
-    }
-  });
+    canvas.on('mouse:up', () => {
+        if (isDragging) {
+            canvas.setCursor('grab');
+            isDragging = false;
+        }
+    });
 }
 
 export function getCanvas(root: string, opts: ParanoidOpts) {
-  const elem = document.getElementById(root);
+    const elem = document.getElementById(root);
 
-  if (!elem) {
-    throw new Error(`Not found element with id ${root}`);
-  }
+    if (!elem) {
+        throw new Error(`Not found element with id ${root}`);
+    }
 
-  elem.style.position = "relative";
+    elem.style.position = 'relative';
 
-  const plus = getButton("+", "plus");
-  const minus = getButton("-", "minus");
-  const normalZoom = getButton("1:1", "normal");
+    const plus = getButton('+', 'plus');
+    const minus = getButton('-', 'minus');
+    const normalZoom = getButton('1:1', 'normal');
 
-  const canvas = initCanvas(elem, opts);
-  const controllers = getControllers(plus, minus, normalZoom, opts.colors);
-  elem.appendChild(controllers);
+    const canvas = initCanvas(elem, opts);
+    const controllers = getControllers(plus, minus, normalZoom, opts.colors);
+    elem.appendChild(controllers);
 
-  initZoom(canvas, plus, minus, normalZoom, opts);
-  initPan(canvas);
+    initZoom(canvas, plus, minus, normalZoom, opts);
+    initPan(canvas);
 
-  return canvas;
+    return canvas;
 }
