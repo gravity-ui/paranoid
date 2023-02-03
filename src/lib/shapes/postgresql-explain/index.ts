@@ -1,14 +1,15 @@
-import { TreeNode } from "../../tree";
-import { ParanoidEmmiter } from "../../event-emmiter";
-import { Coordinates, ParanoidOpts } from "../../models";
-import { TopolgyNodeShape } from "./node";
+import {ParanoidEmmiter} from '../../event-emmiter';
+import {Coordinates, ParanoidOpts} from '../../models';
+import {TreeNode} from '../../tree';
+
+import {TopolgyNodeShape} from './node';
 
 export function getPostgresqlPlanNodeShape(
-  canvas: fabric.Canvas,
-  coords: Coordinates,
-  node: TreeNode,
-  opts: ParanoidOpts,
-  em: ParanoidEmmiter
+    canvas: fabric.Canvas,
+    coords: Coordinates,
+    node: TreeNode,
+    opts: ParanoidOpts,
+    em: ParanoidEmmiter,
 ) {
-  return new TopolgyNodeShape(canvas, coords, node, opts, em);
+    return new TopolgyNodeShape(canvas, coords, node, opts, em);
 }

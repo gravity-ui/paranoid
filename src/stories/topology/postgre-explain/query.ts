@@ -26,11 +26,11 @@ explain ({{value}})  WITH src AS (SELECT name, created, null_version, delete_mar
     ;
 `;
 export enum QueryType {
-  Format = "FORMAT json",
-  Analyze = "FORMAT json, ANALYZE",
-  Full = "FORMAT json, ANALYZE, BUFFERS, TIMING, VERBOSE",
+    Format = 'FORMAT json',
+    Analyze = 'FORMAT json, ANALYZE',
+    Full = 'FORMAT json, ANALYZE, BUFFERS, TIMING, VERBOSE',
 }
 
 export function getQuery(type: QueryType) {
-  return query.replace("{{value}}", type);
+    return query.replace('{{value}}', type);
 }

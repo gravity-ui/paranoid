@@ -1,67 +1,59 @@
-import { Colors, fabric, TopologyNodeTag } from "../../../models";
-import { GroupControls, NODE_FONT_FAMILY } from "../../../constants";
-import { NodeSize } from "./constants";
+import {GroupControls, NODE_FONT_FAMILY} from '../../../constants';
+import {Colors, TopologyNodeTag, fabric} from '../../../models';
 
-function getTag(
-  { value, theme }: TopologyNodeTag,
-  top: number,
-  left: number,
-  colors: Colors
-) {
-  const title = new fabric.Text(value, {
-    left: NodeSize.textOffset,
-    top: NodeSize.textOffset / 2,
-    fontSize: NodeSize.textFontSize,
-    lineHeight: NodeSize.textLineHeight,
-    fontFamily: NODE_FONT_FAMILY,
-    fill: theme === "danger" ? colors?.error : colors?.warning,
-  });
+import {NodeSize} from './constants';
 
-  const rect = new fabric.Rect({
-    width: title.getScaledWidth() + NodeSize.textOffset * 2,
-    height: 20,
-    fill:
-      theme === "danger" ? colors?.errorBackground : colors?.warningBackground,
-    rx: NodeSize.borderRadius,
-    ry: NodeSize.borderRadius,
-  });
+function getTag({value, theme}: TopologyNodeTag, top: number, left: number, colors: Colors) {
+    const title = new fabric.Text(value, {
+        left: NodeSize.textOffset,
+        top: NodeSize.textOffset / 2,
+        fontSize: NodeSize.textFontSize,
+        lineHeight: NodeSize.textLineHeight,
+        fontFamily: NODE_FONT_FAMILY,
+        fill: theme === 'danger' ? colors?.error : colors?.warning,
+    });
 
-  return new fabric.Group([rect, title], {
-    left: left,
-    top: top,
-    ...GroupControls,
-  });
+    const rect = new fabric.Rect({
+        width: title.getScaledWidth() + NodeSize.textOffset * 2,
+        height: 20,
+        fill: theme === 'danger' ? colors?.errorBackground : colors?.warningBackground,
+        rx: NodeSize.borderRadius,
+        ry: NodeSize.borderRadius,
+    });
+
+    return new fabric.Group([rect, title], {
+        left: left,
+        top: top,
+        ...GroupControls,
+    });
 }
 
 export function getTags(tags: TopologyNodeTag[], colors: Colors) {
-  let tagTop = 0;
-  const width = NodeSize.width - NodeSize.padding * 2;
+    let tagTop = 0;
+    const width = NodeSize.width - NodeSize.padding * 2;
 
-  const tagObjects = tags.reduce((acc, tag, index) => {
-    let left = 0;
-    const previousTag = acc[index - 1];
+    const tagObjects = tags.reduce((acc, tag, index) => {
+        let left = 0;
+        const previousTag = acc[index - 1];
 
-    if (previousTag) {
-      left +=
-        (previousTag.left || 0) +
-        previousTag.getScaledWidth() +
-        NodeSize.textOffset;
-    }
+        if (previousTag) {
+            left += (previousTag.left || 0) + previousTag.getScaledWidth() + NodeSize.textOffset;
+        }
 
-    const tagObject = getTag(tag, tagTop, left, colors);
+        const tagObject = getTag(tag, tagTop, left, colors);
 
-    if (left + tagObject.getScaledWidth() >= width) {
-      left = 0;
-      tagTop += tagObject.getScaledHeight() + NodeSize.textOffset;
-      tagObject.set({ left, top: tagTop });
-    }
+        if (left + tagObject.getScaledWidth() >= width) {
+            left = 0;
+            tagTop += tagObject.getScaledHeight() + NodeSize.textOffset;
+            tagObject.set({left, top: tagTop});
+        }
 
-    acc.push(tagObject);
+        acc.push(tagObject);
 
-    return acc;
-  }, [] as fabric.Object[]);
+        return acc;
+    }, [] as fabric.Object[]);
 
-  return new fabric.Group(tagObjects, {
-    ...GroupControls,
-  });
+    return new fabric.Group(tagObjects, {
+        ...GroupControls,
+    });
 }
