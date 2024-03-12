@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "commitlint": "npm i @commitlint/config-conventional && npx commitlint",
+    "commitlint": "npm i @commitlint/config-conventional@15 && npx commitlint@15",
     "start": "start-storybook -p 7010",
     "build-storybook": "build-storybook -c .storybook -o storybook-static",
     "prepublishOnly": "npm run build",
