@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/gravity-ui/paranoid/compare/v1.4.0...v1.4.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* lodash imports ([#25](https://github.com/gravity-ui/paranoid/issues/25)) ([cfe5e35](https://github.com/gravity-ui/paranoid/commit/cfe5e35b1cf60c019c575565262d77d2e58fbb3b))
+
 ## [1.4.0](https://github.com/gravity-ui/paranoid/compare/v1.3.0...v1.4.0) (2023-02-03)
 
 
