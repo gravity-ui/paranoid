@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import {
     GraphNode,
@@ -186,7 +186,7 @@ export function parseExplain(query: string) {
     const links: Link[] = [];
     const nodes: GraphNode<TopologyNodeData>[] = [];
     const explain = result[0];
-    const rootPlan = _.get(explain, ['Plan'], {} as Plan);
+    const rootPlan = get(explain, ['Plan'], {} as Plan);
 
     let maxDuration = {id: '', max: 0};
     let maxCost = {id: '', max: 0};

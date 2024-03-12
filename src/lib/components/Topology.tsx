@@ -1,6 +1,7 @@
 import React from 'react';
 
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
+import isEqual from 'lodash/isEqual';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import {getTopology} from '../main';
@@ -21,7 +22,7 @@ export class TopologyWrapper extends React.Component<TopologyProps> {
     private container: React.RefObject<HTMLDivElement>;
     private resizeObserver: ResizeObserver;
 
-    private handleResize = _.debounce((entries: ResizeObserverEntry[]) => {
+    private handleResize = debounce((entries: ResizeObserverEntry[]) => {
         const {contentRect} = entries[0];
 
         this.paranoid?.getCanvas().setWidth(contentRect.width);
@@ -52,10 +53,7 @@ export class TopologyWrapper extends React.Component<TopologyProps> {
     }
 
     componentDidUpdate({data, opts}: TopologyProps) {
-        if (
-            this.paranoid &&
-            (!_.isEqual(data, this.props.data) || !_.isEqual(opts, this.props.opts))
-        ) {
+        if (this.paranoid && (!isEqual(data, this.props.data) || !isEqual(opts, this.props.opts))) {
             this.paranoid?.destroy();
             this.paranoid = getTopology(
                 paranoidRoot,

@@ -1,12 +1,10 @@
-import _ from 'lodash';
-
 import {NODE_FONT_FAMILY} from '../../../constants';
 import {Colors, fabric} from '../../../models';
 
 import {NodeSize} from './constants';
 
 export function getPercentage(timePercentage: string, colors: Colors) {
-    const value = _.isNaN(Number(timePercentage)) ? '0' : timePercentage;
+    const value = isNaN(Number(timePercentage)) ? '0' : timePercentage;
     return new fabric.Text(`${value}%`, {
         fontSize: NodeSize.textFontSize,
         lineHeight: NodeSize.textLineHeight,

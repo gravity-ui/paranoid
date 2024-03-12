@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 import {CompactTopology} from '../compact-topology';
 import {getCompactTopology} from '../main';
@@ -22,10 +22,7 @@ export class CompactTopologyWrapper extends React.Component<CompactTopologyProps
     }
 
     componentDidUpdate({data, opts}: CompactTopologyProps) {
-        if (
-            this.paranoid &&
-            (!_.isEqual(data, this.props.data) || !_.isEqual(opts, this.props.opts))
-        ) {
+        if (this.paranoid && (!isEqual(data, this.props.data) || !isEqual(opts, this.props.opts))) {
             this.paranoid?.destroy();
             this.paranoid = getCompactTopology(paranoidRoot, this.props.data, this.props.opts);
             this.paranoid.renderCompactTopology();
