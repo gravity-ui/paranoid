@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import {GroupControls} from '../../../constants';
 import {ParanoidEmmiter} from '../../../event-emmiter';
@@ -38,7 +38,7 @@ export class ConnectionNodeShape implements Shape {
         this.treeNode = treeNode;
         this.opts = opts;
         this.em = em;
-        this.data = _.get(treeNode, ['data', 'data']);
+        this.data = get(treeNode, ['data', 'data']);
 
         this.objects = this.prepareShapeObjects();
         this.setShapeObjectsCoords();

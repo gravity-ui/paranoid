@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import {NODE_FONT_FAMILY} from '../../../constants';
 import {Colors, fabric} from '../../../models';
 
@@ -7,7 +5,7 @@ import {NodeSize} from './constants';
 
 export function getTime(time: number, colors: Colors) {
     let value = time.toFixed(1);
-    if (_.isNaN(time)) {
+    if (isNaN(time)) {
         value = '0';
     } else if (time < 1) {
         value = '<1';

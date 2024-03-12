@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import {
     Coordinates,
@@ -98,7 +98,7 @@ class DefaultShape implements Shape {
     private createGroup() {
         const {top, left} = this.coords;
 
-        const title = new fabric.Text(_.get(this.treeNode, ['data', 'name']), {
+        const title = new fabric.Text(get(this.treeNode, ['data', 'name']), {
             fontSize: NodeSizes.titleFontSize,
             lineHeight: NodeSizes.titleLineHeight,
             left: NodeSizes.paddingLeft,

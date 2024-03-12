@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 
 import {ParanoidEmmiter} from '../../event-emmiter';
 import {Coordinates, ParanoidOpts} from '../../models';
@@ -11,25 +11,25 @@ import {ResultNodeShape} from './result-node';
 import {StageNodeShape} from './stage-node';
 
 function isConnectionNode(node: TreeNode) {
-    const data = _.get(node, ['data', 'data']);
+    const data = get(node, ['data', 'data']);
 
     return data?.type === 'connection';
 }
 
 function isResultNode(node: TreeNode) {
-    const data = _.get(node, ['data', 'data']);
+    const data = get(node, ['data', 'data']);
 
     return data?.type === 'result';
 }
 
 function isQueryNode(node: TreeNode) {
-    const data = _.get(node, ['data', 'data']);
+    const data = get(node, ['data', 'data']);
 
     return data?.type === 'query';
 }
 
 function isMaterializeNode(node: TreeNode) {
-    const data = _.get(node, ['data', 'data']);
+    const data = get(node, ['data', 'data']);
 
     return data?.type === 'materialize';
 }

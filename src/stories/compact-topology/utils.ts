@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import forEach from 'lodash/forEach';
+import get from 'lodash/get';
+import uniqBy from 'lodash/uniqBy';
 
 import {GraphNode, Link, TextOverflow} from '../../lib';
 
@@ -121,7 +123,7 @@ export function prepareExplainData(tables: any) {
     const links: Link[] = [];
     const nodes: GraphNode[] = [];
 
-    _.forEach(tables, (table) => {
+    forEach(tables, (table) => {
         nodes.push({
             name: table.name,
         });
@@ -131,7 +133,7 @@ export function prepareExplainData(tables: any) {
         const {reads = [], writes = []} = table;
         let prevEl: {type: string} | null = null;
 
-        _.forEach([...reads, ...writes], (node) => {
+        forEach([...reads, ...writes], (node) => {
             if (tableTypes[node.type]) {
                 tableTypes[node.type] = tableTypes[node.type] + 1;
             } else {
@@ -390,7 +392,7 @@ interface DataprocHost {
 }
 
 export function prepareDataprocHosts(hosts: DataprocHost[]) {
-    const subclusters: Subcluster[] = _.uniqBy(
+    const subclusters: Subcluster[] = uniqBy(
         hosts.map((host) => host.subcluster as Subcluster),
         'id',
     );
@@ -411,7 +413,7 @@ export function prepareDataprocHosts(hosts: DataprocHost[]) {
         name: host.name as string,
         status: host.health as string,
         meta: host.role as string,
-        group: _.get(host, ['subcluster', 'name']),
+        group: get(host, ['subcluster', 'name']),
         computeInstanceId: host.computeInstanceId,
     }));
 
