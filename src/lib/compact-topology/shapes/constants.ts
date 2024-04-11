@@ -44,6 +44,8 @@ export const defaultColors = {
     titleHoverColor: '#004080',
 };
 
+export const test = 1;
+
 const ANCHOR_RADIUS = 3;
 const ANCHOR_OFFSET = 10;
 const NODE_WIDTH = 239;
