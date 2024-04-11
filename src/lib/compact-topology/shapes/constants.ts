@@ -1,19 +1,19 @@
 export function getCommonColors() {
     const colorsMap: Record<string, string> = {
-        success: '--yc-color-text-positive',
-        error: '--yc-color-scarlet',
-        warning: '--yc-color-amber',
-        mute: '--yc-color-decoration',
-        stroke: '--yc-color-text-hint',
-        fill: '--yc-color-base-area',
-        nodeFill: '--yc-color-float-area',
-        nodeShadow: '--yc-color-card-shadow',
-        titleColor: '--yc-color-text-primary',
-        textColor: '--yc-color-text-complementary',
-        buttonBorderColor: '--yc-color-divider',
-        groupBorderColor: '--yc-color-celestial-thunder',
-        groupFill: '--yc-color-celestial',
-        titleHoverColor: '--yc-color-link-hover',
+        success: '--g-color-text-positive',
+        error: '--g-color-text-danger',
+        warning: '--g-color-text-warning',
+        mute: '--g-color-base-generic-accent',
+        stroke: '--g-color-text-hint',
+        fill: '--g-color-base-generic-ultralight',
+        nodeFill: '--g-color-base-float',
+        nodeShadow: '--g-color-sfx-shadow',
+        titleColor: '--g-color-text-primary',
+        textColor: '--g-color-text-complementary',
+        buttonBorderColor: '--g-color-line-generic',
+        groupBorderColor: '--g-color-base-info-light-hover',
+        groupFill: '--g-color-base-info-light',
+        titleHoverColor: '--g-color-text-link-hover',
     };
 
     const style = getComputedStyle(document.body);
