@@ -6,8 +6,8 @@ import {
     BOTTOM_OFFSET_WITH_MULTIPLE_CHILDREN,
 } from './layout/topology/get-node-coordinates';
 import {getNodeBottomCenter, getNodeTopCenter} from './layout/topology/utils';
-import {ParanoidOpts} from './models';
-import Parser from './parser';
+import type {ParanoidOpts} from './models';
+import type Parser from './parser';
 
 export function getTopologyLinks(parser: Parser, opts: ParanoidOpts) {
     const colors = opts.colors;

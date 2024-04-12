@@ -5,9 +5,9 @@ import {NODE_MARGIN} from '../constants';
 import {ParanoidEmmiter} from '../event-emmiter';
 import {getCanvasObjects as getTopologyObjects} from '../layout/topology';
 import {getTopologyLinks} from '../links';
-import {Colors, Data, ParanoidOpts, Shapes} from '../models';
+import type {Colors, Data, ParanoidOpts, Shapes} from '../models';
 import Parser from '../parser';
-import {Tree} from '../tree';
+import type {Tree} from '../tree';
 
 export class Topology {
     private canvas: fabric.Canvas;

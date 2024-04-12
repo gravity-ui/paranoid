@@ -2,9 +2,9 @@ import React from 'react';
 
 import isEqual from 'lodash/isEqual';
 
-import {CompactTopology} from '../compact-topology';
+import type {CompactTopology} from '../compact-topology';
 import {getCompactTopology} from '../main';
-import {Data, Options} from '../models';
+import type {Data, Options} from '../models';
 
 const paranoidRoot = 'paranoidRoot';
 export interface CompactTopologyProps {

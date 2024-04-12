@@ -1,40 +1,42 @@
 import React from 'react';
 
-import {Data} from '../../lib';
+import {Button} from '@gravity-ui/uikit';
+
+import type {Data} from '../../lib';
 import {CompactTopologyWrapper} from '../../lib/components/CompactTopology';
+import {useKey} from '../utils';
 
 const opts = {initialTop: 50, initialLeft: 50, initialZoomFitsCanvas: true};
 export interface StoryCarouselProps {
     datas: Data[];
 }
-export class StoryCarousel extends React.Component<StoryCarouselProps, {dataIndex: number}> {
-    constructor(props: StoryCarouselProps) {
-        super(props);
-        this.state = {
-            dataIndex: 0,
-        };
-    }
 
-    render() {
-        return (
-            <React.Fragment>
-                <button onClick={this.handleClick}>Switch plan</button>
-                <CompactTopologyWrapper
-                    data={this.props.datas[this.state.dataIndex]}
-                    opts={opts}
-                    styles={{height: 'calc(100vh - 60px)'}}
-                />
-            </React.Fragment>
-        );
-    }
+export function StoryCarousel({datas}: StoryCarouselProps) {
+    const [dataIndex, setDataIndex] = React.useState(0);
 
-    private handleClick = () => {
-        let newIndex = this.state.dataIndex + 1;
+    const key = useKey();
 
-        if (newIndex > this.props.datas.length - 1) {
-            newIndex = 0;
-        }
-
-        this.setState({dataIndex: newIndex});
+    const handleClick = () => {
+        setDataIndex((prev) => {
+            let newIndex = prev + 1;
+            if (newIndex > datas.length - 1) {
+                newIndex = 0;
+            }
+            return newIndex;
+        });
     };
+
+    return (
+        <React.Fragment>
+            <Button onClick={handleClick} view="action">
+                Switch plan
+            </Button>
+            <CompactTopologyWrapper
+                key={key}
+                data={datas[dataIndex]}
+                opts={opts}
+                styles={{height: 'calc(100vh - 60px)'}}
+            />
+        </React.Fragment>
+    );
 }

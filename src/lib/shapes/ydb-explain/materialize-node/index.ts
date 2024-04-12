@@ -1,9 +1,10 @@
 import get from 'lodash/get';
 
 import {GroupControls} from '../../../constants';
-import {ParanoidEmmiter} from '../../../event-emmiter';
-import {Coordinates, ExplainPlanNodeData, ParanoidOpts, Shape, fabric} from '../../../models';
-import {TreeNode} from '../../../tree';
+import type {ParanoidEmmiter} from '../../../event-emmiter';
+import type {Coordinates, ExplainPlanNodeData, ParanoidOpts, Shape} from '../../../models';
+import {fabric} from '../../../models';
+import type {TreeNode} from '../../../tree';
 
 import {NodeSize} from './constants';
 import {getTitle} from './title';

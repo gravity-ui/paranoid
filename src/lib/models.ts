@@ -1,5 +1,5 @@
-import {ParanoidEmmiter} from './event-emmiter';
-import {TreeNode} from './tree';
+import type {ParanoidEmmiter} from './event-emmiter';
+import type {TreeNode} from './tree';
 export {fabric} from 'fabric';
 
 export interface Metric {
@@ -17,10 +17,7 @@ export interface GraphNode<TData = any> {
     metrics?: Metric[];
 }
 
-export enum LinkType {
-    Arrow = 'arrow',
-    Line = 'line',
-}
+export type LinkType = 'arrow' | 'line';
 
 export interface Link {
     from: string;
@@ -57,10 +54,7 @@ export interface EnhancedColors extends Colors {
     getCommonColor(name: string): string;
 }
 
-export enum TextOverflow {
-    Normal = 'normal',
-    Ellipsis = 'ellipsis',
-}
+export type TextOverflow = 'normal' | 'ellipsis';
 
 export interface Options {
     colors?: Colors;

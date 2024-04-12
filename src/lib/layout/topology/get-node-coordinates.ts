@@ -1,6 +1,7 @@
-import {fabric} from 'fabric';
+import type {fabric} from 'fabric';
 
-import {TreeNode, findMostleftLeaf, findMostrightLeaf} from '../../tree';
+import type {TreeNode} from '../../tree';
+import {findMostleftLeaf, findMostrightLeaf} from '../../tree';
 
 import {getRightPoint} from './utils';
 

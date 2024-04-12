@@ -6,7 +6,7 @@ export const defaultColors = {
     warningBackground: 'rgba(255,219,77,0.3)',
     mute: 'rgba(0,0,0,0.15)',
     stroke: 'rgba(0,0,0,0.3)',
-    fill: '#fafafa',
+    fill: 'rgb(38, 34, 38)',
     nodeFill: '#ffffff',
     nodeShadow: 'rgba(0,0,0,0.15)',
     titleColor: '#000000',

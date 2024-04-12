@@ -1,6 +1,6 @@
-import {ParanoidEmmiter} from '../../event-emmiter';
-import {Coordinates, ParanoidOpts} from '../../models';
-import {TreeNode} from '../../tree';
+import type {ParanoidEmmiter} from '../../event-emmiter';
+import type {Coordinates, ParanoidOpts} from '../../models';
+import type {TreeNode} from '../../tree';
 
 import {TopolgyNodeShape} from './node';
 

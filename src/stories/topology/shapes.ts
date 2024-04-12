@@ -1,17 +1,7 @@
 import get from 'lodash/get';
 
-import {
-    Coordinates,
-    GroupControls,
-    NODE_FONT_FAMILY,
-    NodeSizes,
-    ParanoidEmmiter,
-    ParanoidOpts,
-    Shape,
-    Shapes,
-    TreeNode,
-    fabric,
-} from '../../lib';
+import {GroupControls, NODE_FONT_FAMILY, NodeSizes, fabric} from '../../lib';
+import type {Coordinates, ParanoidEmmiter, ParanoidOpts, Shape, Shapes, TreeNode} from '../../lib';
 
 class DefaultShape implements Shape {
     private canvas: fabric.Canvas;

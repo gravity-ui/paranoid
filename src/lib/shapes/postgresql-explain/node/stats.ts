@@ -1,12 +1,12 @@
 import {GroupControls, NODE_FONT_FAMILY} from '../../../constants';
-import {
+import type {
     Colors,
     Coordinates,
     TopologyNodeDataStats,
     TopologyNodeDataStatsItem,
     TopologyNodeDataStatsSection,
-    fabric,
 } from '../../../models';
+import {fabric} from '../../../models';
 
 import {NodeSize} from './constants';
 

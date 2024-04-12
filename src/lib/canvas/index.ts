@@ -1,6 +1,6 @@
 import {fabric} from 'fabric';
 
-import {Colors, ParanoidOpts} from '../models';
+import type {Colors, ParanoidOpts} from '../models';
 
 import {getControllersStyle} from './utils';
 

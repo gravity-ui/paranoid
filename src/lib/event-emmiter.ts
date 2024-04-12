@@ -1,4 +1,4 @@
-import {TreeNode} from './tree';
+import type {TreeNode} from './tree';
 
 export class ResizeEvent extends CustomEvent<TreeNode> {}
 

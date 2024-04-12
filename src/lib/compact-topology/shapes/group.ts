@@ -1,7 +1,7 @@
 import {fabric} from 'fabric';
 
 import {GroupControls, NODE_FONT_FAMILY} from '../../constants';
-import {Colors} from '../../models';
+import type {Colors} from '../../models';
 
 import renderAnchor from './anchor';
 import {AnchorSizes, GroupSizes, NodeSizes} from './constants';

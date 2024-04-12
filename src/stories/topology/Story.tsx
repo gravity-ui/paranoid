@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {Data, Topology, getTopology} from '../../lib';
+import {getTopology} from '../../lib';
+import type {Data, Topology} from '../../lib';
 
 import {shapes} from './shapes';
 

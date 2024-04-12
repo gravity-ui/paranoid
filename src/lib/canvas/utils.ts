@@ -1,4 +1,4 @@
-import {Colors} from '../models';
+import type {Colors} from '../models';
 
 export function getControllersStyle(colors: Colors) {
     return `

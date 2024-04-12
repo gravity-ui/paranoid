@@ -1,7 +1,7 @@
 import {fabric} from 'fabric';
 
 import {GroupControls} from '../../constants';
-import {Colors, LinkType} from '../../models';
+import type {Colors, LinkType} from '../../models';
 
 function getLineStart(parent: fabric.Group) {
     const {left = 0, top = 0, width = 0, height = 0} = parent;
@@ -59,7 +59,7 @@ export default function renderLine(
     parent: fabric.Group,
     child: fabric.Group,
     colors: Colors,
-    lineType: LinkType = LinkType.Arrow,
+    lineType: LinkType = 'arrow',
 ) {
     const {x: x0, y: y0} = getLineStart(parent);
     const {x, y} = getLineEnd(child);
@@ -89,7 +89,7 @@ export default function renderLine(
     );
     const group = [line];
 
-    if (lineType !== LinkType.Line) {
+    if (lineType !== 'line') {
         const arrow = new fabric.Path(getArrowPath(x, y), {
             fill: colors.stroke,
             stroke: colors.stroke,

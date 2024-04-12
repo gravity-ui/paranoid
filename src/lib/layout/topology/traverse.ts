@@ -1,7 +1,7 @@
-import {ParanoidEmmiter} from 'src/lib/event-emmiter';
+import type {ParanoidEmmiter} from 'src/lib/event-emmiter';
 
-import {ParanoidOpts, Shapes} from '../../models';
-import {Tree, TreeNode} from '../../tree';
+import type {ParanoidOpts, Shapes} from '../../models';
+import type {Tree, TreeNode} from '../../tree';
 
 import {LEFT_OFFSET, getBottomOffset} from './get-node-coordinates';
 

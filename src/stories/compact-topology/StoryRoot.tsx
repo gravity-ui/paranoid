@@ -1,51 +1,10 @@
 import React from 'react';
 
-import {radios} from '@storybook/addon-knobs';
-
-import {
-    Colors,
-    CompactTopology,
-    Data,
-    GraphNode,
-    LinkType,
-    TextOverflow,
-    getCompactTopology,
-} from '../../lib/';
+import {getCompactTopology} from '../../lib/';
+import type {Colors, CompactTopology, Data, GraphNode, LinkType, TextOverflow} from '../../lib/';
+import {useKey} from '../utils';
 
 import {onTitleClick, prepareCopyText, renderTitle} from './utils';
-
-const lightColors = {
-    success: 'rgba(59, 201, 53, 0.75)',
-    error: '#ff0400',
-    warning: '#ff7700',
-    mute: 'rgba(0,0,0,0.15)',
-    stroke: 'rgba(0,0,0,0.3)',
-    fill: '#fafafa',
-    nodeFill: '#ffffff',
-    nodeShadow: 'rgba(0,0,0,0.15)',
-    titleColor: '#000000',
-    textColor: 'rgba(0,0,0,0.7)',
-    buttonBorderColor: 'rgba(0,0,0,0.07)',
-};
-
-const darkColors = {
-    success: 'rgba(59,201,53,0.75)',
-    error: '#bf3230',
-    warning: '#cc6810',
-    mute: 'rgba(255,255,255,0.15)',
-    stroke: 'rgba(255,255,255,0.17)',
-    fill: '#313037',
-    nodeFill: '#3b3a41',
-    nodeShadow: 'rgba(0,0,0,0.2)',
-    titleColor: 'rgba(255,255,255,0.7)',
-    textColor: 'rgba(255,255,255,0.55)',
-    buttonBorderColor: 'rgba(255,255,255,0.07)',
-};
-
-const options = {
-    Light: 'light',
-    Dark: 'dark',
-};
 
 export interface ParanoidRootProps {
     linkType?: LinkType;
@@ -58,9 +17,9 @@ export interface ParanoidRootProps {
 export interface StoryRootProps extends ParanoidRootProps {}
 
 export default function StoryRoot(props: StoryRootProps) {
-    const theme = radios('Theme', options, 'light');
-    const colors = theme === options.Light ? lightColors : darkColors;
-    return <ParanoidRoot colors={colors} {...props} />;
+    const key = useKey();
+
+    return <ParanoidRoot {...props} key={key} />;
 }
 
 export class ParanoidRoot extends React.Component<ParanoidRootProps> {

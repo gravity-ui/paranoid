@@ -1,5 +1,5 @@
 import {NodeType} from './constants';
-import {Data, GraphNode, Link, ParanoidOpts} from './models';
+import type {Data, GraphNode, Link, ParanoidOpts} from './models';
 import {Tree, TreeNode} from './tree';
 
 export interface GraphGroupNode<TData = any> {

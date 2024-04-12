@@ -1,4 +1,4 @@
-import {TreeNode} from '../../tree';
+import type {TreeNode} from '../../tree';
 
 export function getRightPoint(node: TreeNode) {
     const canvasNode = node.canvasNode as fabric.Object;

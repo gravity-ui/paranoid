@@ -1,7 +1,7 @@
 import {fabric} from 'fabric';
 
 import {NODE_FONT_FAMILY} from '../../constants';
-import {EnhancedColors, Metric} from '../../models';
+import type {EnhancedColors, Metric} from '../../models';
 
 import {NodeSizes} from './constants';
 

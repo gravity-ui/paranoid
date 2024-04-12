@@ -1,7 +1,8 @@
 import {GroupControls} from '../../../constants';
-import {ParanoidEmmiter} from '../../../event-emmiter';
-import {Coordinates, ParanoidOpts, Shape, fabric} from '../../../models';
-import {TreeNode} from '../../../tree';
+import type {ParanoidEmmiter} from '../../../event-emmiter';
+import type {Coordinates, ParanoidOpts, Shape} from '../../../models';
+import {fabric} from '../../../models';
+import type {TreeNode} from '../../../tree';
 
 import {NodeSize} from './constants';
 
