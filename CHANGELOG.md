@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/gravity-ui/paranoid/compare/v2.0.0...v2.0.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* emit d.ts files ([#31](https://github.com/gravity-ui/paranoid/issues/31)) ([6413f3d](https://github.com/gravity-ui/paranoid/commit/6413f3d52371cb1b5a752bc9789e6517afe4c360))
+
 ## [2.0.0](https://github.com/gravity-ui/paranoid/compare/v1.4.1...v2.0.0) (2024-04-19)
 
 
