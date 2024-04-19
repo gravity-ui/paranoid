@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/gravity-ui/paranoid/compare/v1.4.1...v2.0.0) (2024-04-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update colors, dependencies ([#29](https://github.com/gravity-ui/paranoid/issues/29))
+
+### Features
+
+* update colors, dependencies ([#29](https://github.com/gravity-ui/paranoid/issues/29)) ([0dfa869](https://github.com/gravity-ui/paranoid/commit/0dfa8697af790f1ff2bb99520dfdde66e7231646))
+
 ## [1.4.1](https://github.com/gravity-ui/paranoid/compare/v1.4.0...v1.4.1) (2024-03-12)
 
 
