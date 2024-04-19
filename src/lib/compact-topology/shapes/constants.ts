@@ -36,7 +36,7 @@ export const defaultColors = {
     warning: '#ff7700',
     mute: 'rgba(0,0,0,0.15)',
     stroke: 'rgba(0,0,0,0.3)',
-    fill: 'rgb(38, 34, 38)',
+    fill: '#fafafa',
     nodeFill: '#ffffff',
     nodeShadow: 'rgba(0,0,0,0.15)',
     titleColor: '#000000',
