@@ -2,9 +2,9 @@ import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import uniqBy from 'lodash/uniqBy';
 
-import {GraphNode, Link, TextOverflow} from '../../lib';
+import type {GraphNode, Link, TextOverflow} from '../../lib';
 
-import {ClickhoseHost, MongodbHost, PgHost, RedisHost} from './data';
+import type {ClickhoseHost, MongodbHost, PgHost, RedisHost} from './data';
 
 export function getSidebarReadme(hosts: any[]) {
     const sidebar = hosts;
@@ -228,9 +228,12 @@ function getExplainNodeId(...values: string[]) {
     return values.join('|');
 }
 
-export function getPropsForExplainStories() {
+export function getPropsForExplainStories(): {
+    textOverflow: TextOverflow;
+    renderNodeTitle: typeof renderExplainNode;
+} {
     return {
-        textOverflow: TextOverflow.Normal,
+        textOverflow: 'normal',
         renderNodeTitle: renderExplainNode,
     };
 }
@@ -250,15 +253,18 @@ function groupHosts(hosts: MongodbHost[]) {
     const mongod = hosts.filter(({type}) => type === MongoHost.Mongod);
     const mongocfg = hosts.filter(({type}) => type === MongoHost.Mongocfg);
     const mongos = hosts.filter(({type}) => type === MongoHost.Mongos);
-    const shards = mongod.reduce((acc, host) => {
-        const name = host.shardName as string;
-        if (acc[name]) {
-            acc[name].push(host);
-        } else {
-            acc[name] = [host];
-        }
-        return acc;
-    }, {} as Record<string, MongodbHost[]>);
+    const shards = mongod.reduce(
+        (acc, host) => {
+            const name = host.shardName as string;
+            if (acc[name]) {
+                acc[name].push(host);
+            } else {
+                acc[name] = [host];
+            }
+            return acc;
+        },
+        {} as Record<string, MongodbHost[]>,
+    );
 
     return {mongocfg, mongos, mongod: shards};
 }

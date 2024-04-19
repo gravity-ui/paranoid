@@ -1,7 +1,7 @@
 import copyToClipboard from 'copy-to-clipboard';
 import {fabric} from 'fabric';
 
-import {GraphNode, ParanoidOpts} from '../../models';
+import type {GraphNode, ParanoidOpts} from '../../models';
 
 import {CLIPBOARD_WIDTH} from './constants';
 

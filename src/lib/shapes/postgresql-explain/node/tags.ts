@@ -1,5 +1,6 @@
 import {GroupControls, NODE_FONT_FAMILY} from '../../../constants';
-import {Colors, TopologyNodeTag, fabric} from '../../../models';
+import type {Colors, TopologyNodeTag} from '../../../models';
+import {fabric} from '../../../models';
 
 import {NodeSize} from './constants';
 

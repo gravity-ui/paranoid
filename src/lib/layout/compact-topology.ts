@@ -1,11 +1,11 @@
-import {fabric} from 'fabric';
+import type {fabric} from 'fabric';
 
 import {GroupSizes} from '../compact-topology/shapes/constants';
 import renderGroup from '../compact-topology/shapes/group';
 import renderNode from '../compact-topology/shapes/node';
-import {GraphNode, ParanoidOpts} from '../models';
-import {GraphGroupNode} from '../parser';
-import {Tree, TreeNode} from '../tree';
+import type {GraphNode, ParanoidOpts} from '../models';
+import type {GraphGroupNode} from '../parser';
+import type {Tree, TreeNode} from '../tree';
 
 const left0 = 10;
 const top0 = 10;

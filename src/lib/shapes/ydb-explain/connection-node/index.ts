@@ -1,9 +1,10 @@
 import get from 'lodash/get';
 
 import {GroupControls} from '../../../constants';
-import {ParanoidEmmiter} from '../../../event-emmiter';
-import {Coordinates, ExplainPlanNodeData, ParanoidOpts, Shape, fabric} from '../../../models';
-import {TreeNode} from '../../../tree';
+import type {ParanoidEmmiter} from '../../../event-emmiter';
+import type {Coordinates, ExplainPlanNodeData, ParanoidOpts, Shape} from '../../../models';
+import {fabric} from '../../../models';
+import type {TreeNode} from '../../../tree';
 import {getStats} from '../../postgresql-explain/node/stats';
 import {ID_PADDING, createId} from '../common';
 import {initRegroup} from '../utils';
@@ -52,11 +53,11 @@ export class ConnectionNodeShape implements Shape {
     }
 
     getFillColor() {
-        return this.opts.colors.getCommonColor('base-misc');
+        return this.opts.colors.getCommonColor('base-misc-light');
     }
 
     getHoverFillColor() {
-        return this.opts.colors.getCommonColor('base-misc-hover');
+        return this.opts.colors.getCommonColor('base-misc-light-hover');
     }
 
     getShadow() {

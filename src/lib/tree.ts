@@ -1,6 +1,6 @@
-import {fabric} from 'fabric';
+import type {fabric} from 'fabric';
 
-import {Source} from './parser';
+import type {Source} from './parser';
 
 export class TreeNode<T = Source> {
     data: T;

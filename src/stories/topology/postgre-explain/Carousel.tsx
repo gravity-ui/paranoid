@@ -1,6 +1,9 @@
 import React from 'react';
 
-import {Data, TopologyWrapper, getPostgresqlPlanNodeShape} from '../../../lib';
+import {Button} from '@gravity-ui/uikit';
+
+import {TopologyWrapper, getPostgresqlPlanNodeShape} from '../../../lib';
+import type {Data} from '../../../lib';
 
 import {explain as fullExplain} from './format-json-analyze-buffers-timing-verbose';
 import {recursivePlan} from './recursive-plan';
@@ -29,7 +32,9 @@ export class Carousel extends React.Component<{}, {dataIndex: number}> {
     render() {
         return (
             <React.Fragment>
-                <button onClick={this.handleClick}>Switch plan</button>
+                <Button view="action" onClick={this.handleClick}>
+                    Switch plan
+                </Button>
                 <TopologyWrapper
                     data={this.datas[this.state.dataIndex]}
                     opts={opts}

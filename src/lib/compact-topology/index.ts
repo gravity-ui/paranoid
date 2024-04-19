@@ -3,9 +3,10 @@ import {fabric} from 'fabric';
 import {canvasId, getCanvas} from '../canvas';
 import {NodeType} from '../constants';
 import {getCanvasObjects as getCompactTopologyObjects} from '../layout/compact-topology';
-import {Data, ParanoidOpts} from '../models';
-import Parser, {GraphGroupNode, Source} from '../parser';
-import {TreeNode} from '../tree';
+import type {Data, ParanoidOpts} from '../models';
+import Parser from '../parser';
+import type {GraphGroupNode, Source} from '../parser';
+import type {TreeNode} from '../tree';
 
 import {NODE_MARGIN_BOTTOM} from './shapes/constants';
 import renderLine from './shapes/line';

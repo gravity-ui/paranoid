@@ -1,7 +1,7 @@
 import {fabric} from 'fabric';
 
 import {GroupControls, NODE_FONT_FAMILY} from '../../constants';
-import {EnhancedColors, GraphNode, ParanoidOpts, TextOverflow} from '../../models';
+import type {EnhancedColors, GraphNode, ParanoidOpts, TextOverflow} from '../../models';
 import {wrapText} from '../../utils';
 
 import renderAnchor from './anchor';
@@ -18,7 +18,7 @@ function getStatusColor(color: string, colors: EnhancedColors) {
         case 'DEAD':
             return colors.getCommonColor('base-danger-heavy');
         default:
-            return colors.getCommonColor('base-neutral');
+            return colors.getCommonColor('base-neutral-heavy');
     }
 }
 
@@ -65,7 +65,7 @@ export default function renderNode(
     const renderNodeTitle = opts.renderNodeTitle;
     const onTitleClick = opts.onTitleClick;
     const prepareCopyText = opts.prepareCopyText;
-    const textOverflow = opts.textOverflow || TextOverflow.Ellipsis;
+    const textOverflow: TextOverflow = opts.textOverflow || 'ellipsis';
 
     const nodeTitle = renderNodeTitle ? renderNodeTitle(node) : node.name;
 
@@ -114,7 +114,7 @@ export default function renderNode(
               NodeSizes.paddingLeft,
               node.metrics,
               colors,
-              textOverflow === TextOverflow.Ellipsis
+              textOverflow === 'ellipsis'
                   ? NodeSizes.width - NodeSizes.paddingLeft - NodeSizes.paddingRight
                   : Infinity,
           )
@@ -150,7 +150,7 @@ export default function renderNode(
 
     let width = hasChildren ? NodeSizes.widthWithAnchor : NodeSizes.width;
 
-    if (textOverflow === TextOverflow.Ellipsis) {
+    if (textOverflow === 'ellipsis') {
         wrapText(title, NodeSizes.titleMaxWidth);
         wrapText(meta, NodeSizes.metaMaxWidth);
     } else {

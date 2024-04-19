@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import {
+import type {
     GraphNode,
     Link,
     TopologyNodeData,

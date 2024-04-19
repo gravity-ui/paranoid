@@ -1,5 +1,6 @@
 import {NODE_FONT_FAMILY} from '../../../constants';
-import {EnhancedColors, fabric} from '../../../models';
+import {fabric} from '../../../models';
+import type {EnhancedColors} from '../../../models';
 
 import {NodeSize} from './constants';
 

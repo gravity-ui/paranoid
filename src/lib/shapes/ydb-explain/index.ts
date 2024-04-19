@@ -1,8 +1,8 @@
 import get from 'lodash/get';
 
-import {ParanoidEmmiter} from '../../event-emmiter';
-import {Coordinates, ParanoidOpts} from '../../models';
-import {TreeNode} from '../../tree';
+import type {ParanoidEmmiter} from '../../event-emmiter';
+import type {Coordinates, ParanoidOpts} from '../../models';
+import type {TreeNode} from '../../tree';
 
 import {ConnectionNodeShape} from './connection-node';
 import {MaterializeNodeShape} from './materialize-node';

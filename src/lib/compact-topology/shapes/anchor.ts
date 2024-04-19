@@ -1,6 +1,6 @@
 import {fabric} from 'fabric';
 
-import {Colors} from '../../models';
+import type {Colors} from '../../models';
 
 import {AnchorSizes} from './constants';
 

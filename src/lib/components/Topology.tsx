@@ -5,8 +5,8 @@ import isEqual from 'lodash/isEqual';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import {getTopology} from '../main';
-import {Data, Options, Shapes} from '../models';
-import {Topology} from '../topology';
+import type {Data, Options, Shapes} from '../models';
+import type {Topology} from '../topology';
 
 const paranoidRoot = 'paranoidRoot';
 export interface TopologyProps {
