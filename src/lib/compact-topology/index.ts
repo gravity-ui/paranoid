@@ -77,6 +77,10 @@ export class CompactTopology {
         });
     }
 
+    getCanvas() {
+        return this.canvas;
+    }
+
     private renderIntoCanvas(nodes: fabric.Object[], links: fabric.Group[], rendered?: boolean) {
         if (this.canvas) {
             this.clearCanvas();
