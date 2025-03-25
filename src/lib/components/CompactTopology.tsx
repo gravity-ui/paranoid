@@ -1,6 +1,8 @@
 import React from 'react';
 
+import debounce from 'lodash/debounce';
 import isEqual from 'lodash/isEqual';
+import ResizeObserver from 'resize-observer-polyfill';
 
 import type {CompactTopology} from '../compact-topology';
 import {getCompactTopology} from '../main';
@@ -15,10 +17,28 @@ export interface CompactTopologyProps {
 
 export class CompactTopologyWrapper extends React.Component<CompactTopologyProps> {
     private paranoid?: CompactTopology;
+    private container: React.RefObject<HTMLDivElement>;
+    private resizeObserver: ResizeObserver;
+
+    private handleResize = debounce((entries: ResizeObserverEntry[]) => {
+        const {contentRect} = entries[0];
+
+        this.paranoid?.getCanvas().setWidth(contentRect.width);
+        this.paranoid?.getCanvas().setHeight(contentRect.height);
+        this.paranoid?.getCanvas().renderAll();
+    }, 300);
+
+    constructor(props: CompactTopologyProps) {
+        super(props);
+
+        this.container = React.createRef();
+        this.resizeObserver = new ResizeObserver(this.handleResize);
+    }
 
     componentDidMount() {
         this.paranoid = getCompactTopology(paranoidRoot, this.props.data, this.props.opts);
         this.paranoid.renderCompactTopology();
+        this.resizeObserver.observe(this.container.current as Element);
     }
 
     componentDidUpdate({data, opts}: CompactTopologyProps) {
@@ -33,10 +53,18 @@ export class CompactTopologyWrapper extends React.Component<CompactTopologyProps
         if (this.paranoid) {
             this.paranoid.destroy();
         }
+
+        this.resizeObserver.disconnect();
     }
 
     render() {
         const {styles} = this.props;
-        return <div id={paranoidRoot} style={styles ? styles : {height: '100%'}} />;
+        return (
+            <div
+                id={paranoidRoot}
+                style={styles ? styles : {height: '100%'}}
+                ref={this.container}
+            />
+        );
     }
 }
