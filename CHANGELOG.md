@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/gravity-ui/paranoid/compare/v2.0.1...v2.0.2) (2025-03-25)
+
+
+### Bug Fixes
+
+* **CompactTopology:** Added resize logic ([#33](https://github.com/gravity-ui/paranoid/issues/33)) ([0d3fa72](https://github.com/gravity-ui/paranoid/commit/0d3fa72d8fb555f77664e29715a6393e7dd9f162))
+
 ## [2.0.1](https://github.com/gravity-ui/paranoid/compare/v2.0.0...v2.0.1) (2024-04-19)
 
 
