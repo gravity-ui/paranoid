@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/gravity-ui/paranoid/compare/v2.0.2...v3.0.0) (2025-06-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to uikit@7 ([#35](https://github.com/gravity-ui/paranoid/issues/35))
+
+### Features
+
+* update to uikit@7 ([#35](https://github.com/gravity-ui/paranoid/issues/35)) ([a39a5b8](https://github.com/gravity-ui/paranoid/commit/a39a5b8b03e9b17db9e41ea43c75ed44edfe3c9e))
+
 ## [2.0.2](https://github.com/gravity-ui/paranoid/compare/v2.0.1...v2.0.2) (2025-03-25)
 
 
