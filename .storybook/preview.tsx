@@ -1,5 +1,3 @@
-import '@gravity-ui/uikit/styles/styles.css';
-
 import {MINIMAL_VIEWPORTS} from '@storybook/addon-viewport';
 import type {Preview} from '@storybook/react';
 
@@ -7,6 +5,8 @@ import {WithLang} from './decorators/withLang';
 import {WithMobile} from './decorators/withMobile';
 import {WithStrictMode} from './decorators/withStrictMode';
 import {WithTheme} from './decorators/withTheme';
+
+import '@gravity-ui/uikit/styles/styles.css';
 
 const preview: Preview = {
     decorators: [WithLang, WithMobile, WithTheme, WithStrictMode],

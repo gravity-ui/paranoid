@@ -1,8 +1,7 @@
 import React from 'react';
 
-import type {Decorator} from '@storybook/react';
-
 import {ThemeProvider} from '@gravity-ui/uikit';
+import type {Decorator} from '@storybook/react';
 
 export const WithTheme: Decorator = (Story, context) => {
     return (
