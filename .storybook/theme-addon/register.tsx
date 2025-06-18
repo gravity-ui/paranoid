@@ -1,9 +1,9 @@
 import React from 'react';
 
+import {getThemeType} from '@gravity-ui/uikit';
 import type {API} from '@storybook/manager-api';
 import {addons, types, useGlobals} from '@storybook/manager-api';
 
-import {getThemeType} from '@gravity-ui/uikit';
 import {themes} from '../theme';
 
 const ADDON_ID = 'g-theme-addon';
